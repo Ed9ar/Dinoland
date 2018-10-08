@@ -6,8 +6,10 @@ import java.awt.*;
 
 public class Ventana extends JFrame{
     private JPanel panel1, panel2,panel3,panel4, panel41, panel42, panel43, panel44, panel45, panel46;
-    private JDialog border1, border2, border3, border4, border41, border42, border43, border44, border45, border46;
-    private JButton boton1,boton2,arriba, abajo, derecha, izquierda;
+    private JDialog border1, border2, border3, border4;
+    private JButton arriba, abajo, derecha, izquierda;
+    private JPanel[][] square = new JPanel[5][5];
+
 
     public Ventana(){
         super("Dinoland");
@@ -18,11 +20,26 @@ public class Ventana extends JFrame{
     public void initComponents(){
         setSize(800,800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        panel1 = new JPanel();
+        
+        panel1 = new JPanel(new FlowLayout());
+
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 5; j++) {
+                square[i][j] = new JPanel();
+                square[i][j].setLayout(new FlowLayout());
+                square[i][j].setBackground(Color.GREEN);
+                panel1.add(square[i][j]);
+            }
+            
+        }
+        add(panel1, BorderLayout.CENTER);
+
         TitledBorder border1 = new TitledBorder("Mapa");
+        panel1.setLayout(new GridLayout(5,5));
+
         panel1.setLayout(new FlowLayout());
         panel1.setBorder(border1);
-        add(panel1);
+
         panel2 = new JPanel();
         TitledBorder border2 = new TitledBorder("Personaje");
         panel2.setLayout(new FlowLayout());
@@ -60,17 +77,29 @@ public class Ventana extends JFrame{
         panel4.add(panel46);
         add(panel4);
 
+        //Mapa en el segundo panel (Hacer un grid de 5x5 y poner el monito en donde se vaya moviendo con el listener)
+
+        //Poner imagen fija del mono seleccionado
+
+        //Ir agregando labels dependiendo de lo que pasa
+
+        //ImageIcon para los botones, flechas de movimiento en el cuarto panel
         ImageIcon abajoImage = new ImageIcon("Desktop/Abajo.png");
+        ImageIcon arribaImage = new ImageIcon("Desktop/Arriba.png");
+        ImageIcon izquierdaImage = new ImageIcon("Desktop/Izquierda.png");
+        ImageIcon derechaImage = new ImageIcon("Desktop/Derecha.png");
+
         abajo = new JButton();
         arriba = new JButton();
         derecha = new JButton();
         izquierda = new JButton();
+
         //boton1.addActionListener(new BotonListener());
         
-        panel42.add(abajo);
-        panel44.add(derecha);
-        panel45.add(arriba);
-        panel46.add(izquierda);
+        panel42.add(arriba);
+        panel44.add(izquierda);
+        panel45.add(abajo);
+        panel46.add(derecha);
         setVisible(true);
     }
 
