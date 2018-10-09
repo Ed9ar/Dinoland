@@ -1,7 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
-
+import java.awt.event.*;
 import java.awt.*;
 
 public class Ventana extends JFrame{
@@ -23,9 +23,12 @@ public class Ventana extends JFrame{
         
 	    panel1 = new JPanel();
         //panel1.setLayout(new FlowLayout());
+
+        //Mapa en el segundo panel (Hacer un grid de 5x5 y poner el monito en donde se vaya moviendo con el listener)
 	    TitledBorder border1 = new TitledBorder("Mapa");
         panel1.setBorder(border1);
         panel1.setLayout(new GridLayout(5,5));
+
 
         for(int i = 0; i < 5; i++) {
             for(int j = 0; j < 5; j++) {
@@ -79,30 +82,33 @@ public class Ventana extends JFrame{
         panel4.add(panel46);
         add(panel4);
 
-        //Mapa en el segundo panel (Hacer un grid de 5x5 y poner el monito en donde se vaya moviendo con el listener)
-	//panel1.setLayout(new FlowLayout());
 
 
-        //TitledBorder border1 = new TitledBorder("Mapa");
-        
         //Poner imagen fija del mono seleccionado
 
         //Ir agregando labels dependiendo de lo que pasa Scroll Layout, ir agregando labels
 
         //ImageIcon para los botones, flechas de movimiento en el cuarto panel
 
-        ImageIcon abajoImage = new ImageIcon("Desktop/Abajo.png");
-        ImageIcon arribaImage = new ImageIcon("Desktop/Arriba.png");
-        ImageIcon izquierdaImage = new ImageIcon("Desktop/Izquierda.png");
-        ImageIcon derechaImage = new ImageIcon("Desktop/Derecha.png");
+        ImageIcon abajoImage = new ImageIcon("Desktop/Poo/Dinoland/Abajo.png");
+        ImageIcon arribaImage = new ImageIcon("Desktop/POO/Dinoland/Arriba.png");
+        ImageIcon izquierdaImage = new ImageIcon("Desktop/POO/Dinoland/Izquierda.png");
+        ImageIcon derechaImage = new ImageIcon("Desktop/POO/Dinoland/Derecha.png");
 
         abajo = new JButton();
         arriba = new JButton();
         derecha = new JButton();
         izquierda = new JButton();
 
-        //boton1.addActionListener(new BotonListener());
-        
+        abajo.addActionListener(new BotonListener()); 
+        abajo.setIcon(abajoImage);
+        arriba.addActionListener(new BotonListener());
+        arriba.setIcon(arribaImage);
+        izquierda.addActionListener(new BotonListener());
+        izquierda.setIcon(izquierdaImage);
+        derecha.addActionListener(new BotonListener());
+        derecha.setIcon(derechaImage);
+
         panel42.add(arriba);
         panel44.add(izquierda);
         panel45.add(abajo);
@@ -110,9 +116,9 @@ public class Ventana extends JFrame{
         setVisible(true);
     }
 
-    /*public class BotonListener implements ActionListener{
+    public class BotonListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            System.out.println("Presionaste el Btono");
+            System.out.println("Presionaste el Boton de: ");
         }
-    }*/
+    }
 }
