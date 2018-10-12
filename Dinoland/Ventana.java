@@ -7,6 +7,7 @@ import java.awt.*;
 public class Ventana extends JFrame{
     private JPanel panel1, panel2,panel3,panel4, panel41, panel42, panel43, panel44, panel45, panel46;
     private JDialog border1, border2, border3, border4; 
+    private ImageIcon abajoImage;
     private JButton arriba, abajo, derecha, izquierda;
     private JPanel[][] square = new JPanel[5][5];
 
@@ -90,15 +91,15 @@ public class Ventana extends JFrame{
 
         //ImageIcon para los botones, flechas de movimiento en el cuarto panel
 
-        ImageIcon abajoImage = new ImageIcon("Desktop/Poo/Dinoland/Abajo.png");
-        ImageIcon arribaImage = new ImageIcon("Desktop/POO/Dinoland/Arriba.png");
-        ImageIcon izquierdaImage = new ImageIcon("Desktop/POO/Dinoland/Izquierda.png");
-        ImageIcon derechaImage = new ImageIcon("Desktop/POO/Dinoland/Derecha.png");
+        abajoImage = new ImageIcon("Desktop/Poo/Dinoland/Abajo.png");
+        arribaImage = new ImageIcon("Desktop/POO/Dinoland/Arriba.png");
+        izquierdaImage = new ImageIcon("Desktop/POO/Dinoland/Izquierda.png");
+        derechaImage = new ImageIcon("Desktop/POO/Dinoland/Derecha.png");
 
-        abajo = new JButton();
-        arriba = new JButton();
-        derecha = new JButton();
-        izquierda = new JButton();
+        abajo = new JButton(abajoImage);
+        arriba = new JButton(arribaImage);
+        derecha = new JButton(derechaImage);
+        izquierda = new JButton(izquierdaImage);*/
 
         abajo.addActionListener(new BotonListener()); 
         abajo.setIcon(abajoImage);
@@ -107,7 +108,7 @@ public class Ventana extends JFrame{
         izquierda.addActionListener(new BotonListener());
         izquierda.setIcon(izquierdaImage);
         derecha.addActionListener(new BotonListener());
-        derecha.setIcon(derechaImage);
+        derecha.setIcon(derechaImage);*/
 
         panel42.add(arriba);
         panel44.add(izquierda);

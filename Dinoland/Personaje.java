@@ -1,6 +1,5 @@
 
-public class Personaje{
-	
+public abstract class Personaje implements Atacar{
 	private int ataque;
 	private int defensa;
 	private int hp;
@@ -10,7 +9,6 @@ public class Personaje{
 		defensa=0;
 		hp=100;
 	}
-	
 	
 	public Personaje(int ataque,int defensa,int hp){
 		this.ataque=ataque;
