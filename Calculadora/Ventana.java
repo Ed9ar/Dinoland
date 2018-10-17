@@ -7,8 +7,10 @@ public class Ventana extends JFrame{
     private JPanel panelOperaciones,panelBotones;
     private JButton[][] square = new JButton[4][4];
     private JLabel ops;
-    String x,y,symbol, result;
-    private JLabel Uno,Cero,Dos,Tres,Cuatro,Cinco,Seis,Siete,Ocho,Nueve,Mas,Menos,Por,Entre,AC, Igual;
+    String x,y,symbol;
+    Integer x1,y2, en;
+    Integer result;
+    private JLabel Uno,Cero,Dos,Tres,Cuatro,Cinco,Seis,Siete,Ocho,Nueve,Mas,Menos,Por,Entre,AC, Igual, Result;
 
 	public Ventana(){
 		setSize(500,500);
@@ -23,7 +25,8 @@ public class Ventana extends JFrame{
         panelOperaciones.setLayout(new FlowLayout());
         ops = new JLabel();
         ops.setPreferredSize( new Dimension( 400, 200  ) );
-	    panelOperaciones.add(ops);
+        panelOperaciones.add(ops);
+        Result = new JLabel();
         add(panelOperaciones);
         panelBotones= new JPanel();
 		panelBotones.setLayout(new GridLayout(4,4));
@@ -41,6 +44,7 @@ public class Ventana extends JFrame{
             }
             
         }
+        
         Uno = new JLabel("1");
         square[0][0].add(Uno);
         Dos = new JLabel("2");
@@ -230,55 +234,56 @@ public class Ventana extends JFrame{
             }else if (e.getSource() == square[0][3]) {
                 System.out.println("Presionaste Mas");
                 if(symbol == null){
-                    symbol = " ";
-                    symbol += "+";
+                    symbol ="+";
+                    en = 1;
                 }
             }else if (e.getSource() == square[1][3]) {
                 System.out.println("Presionaste Menos");
                 if(symbol == null){
-                    symbol = " ";
-                    symbol += "-";
+                    symbol = "-";
+                    en =2;
+
                 }
             }else if (e.getSource() == square[2][3]) {
                 System.out.println("Presionaste Por");
                 if(symbol == null){
-                    symbol = "";
-                    symbol += "x";
+                    symbol = "x";
+                    en =3;
                 }
             }else if (e.getSource() == square[3][3]) {
                 System.out.println("Presionaste Entre");
                 if(symbol == null){
-                    symbol = " ";
-                    symbol += "%";
+                    symbol = "%";
+                    en =4;
                 }
             }else if (e.getSource() == square[3][2]) {
                 System.out.println("Presionaste Igual");
-                /*
-                if(symbol == "+"){
-                    result = String.valueof(Calculadora.suma(Integer.parseInt(x), Integer.parseInt(y)));
-                }
-                else if(symbol == "-"){
-                    result = Calculadora.resta(Int.parseInt(x), Int.parseInt(y));
-                }
-                else if (symbol == "x"){
-                    result = Calculadora.mul(Int.parseInt(x), Int.parseInt(y));
-                }
-                else if (symbol == "%"){
-                    result = Calculadora.div(Int.parseInt(x), Int.parseInt(y));
-                }
-                if(y == null){
-                    ops.setText(x+symbol+" "+"="+result);
-                }
-                else{
-                    ops.setText(x+symbol+y+"="+result);
-                }*/
 
+                x1 = Integer.parseInt(x);
+                y2 = Integer.parseInt(y);
+                System.out.println(symbol);
+
+                if(en ==1){
+                    result = Calculadora.suma(x1,y2);
+                }
+                else if(en ==2){
+                    result = Calculadora.resta(x1,y2);
+                }
+                else if (en == 3){
+                    result = Calculadora.mul(x1,y2);
+    
+                }
+                else if (en == 4){
+                    result = Calculadora.div(x1,y2);
+                    
+                }
 
             }else if (e.getSource() == square[3][0]) {
                 System.out.println("Presionaste AC");
                 x = null;
                 y = null;
                 symbol = null;
+
             }else if (e.getSource() == square[3][1]) {
                 System.out.println("Presionaste Cero");
                 if(x == null){
@@ -303,7 +308,7 @@ public class Ventana extends JFrame{
             ops.setText(x+symbol+" "+"=");
         }
         else{
-            ops.setText(x+symbol+y+"=");
+            ops.setText(x+symbol+y+"="+result);
         }
     }
 }
