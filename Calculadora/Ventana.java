@@ -103,7 +103,7 @@ public class Ventana extends JFrame{
             }else if (e.getSource() == square[0][1]) {
                 System.out.println("Presionaste Dos");
                 if(x == null){
-                    x = x + "2";
+                    x = "2";
                     y = " ";
 
                 }
@@ -119,7 +119,7 @@ public class Ventana extends JFrame{
             }else if (e.getSource() == square[0][2]) {
                 System.out.println("Presionaste Tres");
                 if(x == null){
-                    x = x + "3";
+                    x = "3";
                     y = " ";
 
                 }
@@ -136,7 +136,7 @@ public class Ventana extends JFrame{
             }else if (e.getSource() == square[1][0]) {
                 System.out.println("Presionaste Cuatro");
                 if(x == null){
-                    x = x + "4";
+                    x = "4";
                     y = " ";
 
                 }
@@ -153,7 +153,7 @@ public class Ventana extends JFrame{
             }else if (e.getSource() == square[1][1]) {
                 System.out.println("Presionaste Cinco");
                 if(x == null){
-                    x = x + "5";
+                    x = "5";
                     y = " ";
 
                 }
@@ -170,7 +170,7 @@ public class Ventana extends JFrame{
             }else if (e.getSource() == square[1][2]) {
                 System.out.println("Presionaste Seis");
                 if(x == null){
-                    x = x + "6";
+                    x = "6";
                     y = " ";
 
                 }
@@ -191,7 +191,7 @@ public class Ventana extends JFrame{
 
                 }
                 else if(x != null && symbol == null){
-                    x = x + "7";
+                    x = "7";
                 }
                 else if(y == " "){
                     y = "7";
@@ -202,7 +202,7 @@ public class Ventana extends JFrame{
             }else if (e.getSource() == square[2][1]) {
                 System.out.println("Presionaste Ocho");
                 if(x == null){
-                    x = x + "8";
+                    x = "8";
                     y = " ";
 
                 }
@@ -218,7 +218,7 @@ public class Ventana extends JFrame{
             }else if (e.getSource() == square[2][2]) {
                 System.out.println("Presionaste Nueve");
                 if(x == null){
-                    x = x + "9";
+                    x = "9";
                     y = " ";
 
                 }
@@ -292,7 +292,7 @@ public class Ventana extends JFrame{
 
                 }
                 else if(x != null && symbol == null){
-                    x = x + "0";
+                    x = "0";
                 }
                 else if(y == " "){
                     y = "0";
