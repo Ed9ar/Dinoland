@@ -1,15 +1,16 @@
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
+//import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
 import java.awt.event.*;
 import java.awt.*;
 
 public class Ventana extends JFrame{
-    private JPanel panel1, panel2,panel3,panel4, panel41, panel42, panel43, panel44, panel45, panel46;
+    private JPanel panel1, panel2,panel3,panel4;
     private JDialog border1, border2, border3, border4; 
-    private ImageIcon abajoImage;
-    private JButton arriba, abajo, derecha, izquierda;
+    private ImageIcon abajoImage, arribaImage, izquierdaImage, derechaImage;
+    private JButton[][] square2 = new JButton[3][2];
     private JPanel[][] square = new JPanel[5][5];
+    private JLabel arriba, abajo, izq, derecha;
 
 
     public Ventana(){
@@ -58,68 +59,46 @@ public class Ventana extends JFrame{
         add(panel3);
         panel4 = new JPanel();
         TitledBorder border4 = new TitledBorder("Movimiento");
-        panel4.setLayout(new FlowLayout());
+        //panel4.setLayout(new FlowLayout());
         panel4.setBorder(border4);
 
         panel4.setLayout(new GridLayout(2,3));
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 2; j++) {
+                square2[i][j] = new JButton();
+                square2[i][j].addActionListener(new BotonListener());
+                square2[i][j].setLayout(new FlowLayout());
+                square2[i][j].setBackground(Color.ORANGE);
 
-        panel41 = new JPanel();
-        panel42 = new JPanel();
-        panel43 = new JPanel();
-        panel44 = new JPanel();
-        panel45 = new JPanel();
-        panel46 = new JPanel();
-        panel41.setLayout(new FlowLayout());
-        panel42.setLayout(new FlowLayout());
-        panel43.setLayout(new FlowLayout());
-        panel44.setLayout(new FlowLayout());
-        panel45.setLayout(new FlowLayout());
-        panel46.setLayout(new FlowLayout());
-        panel4.add(panel41);
-        panel4.add(panel42);
-        panel4.add(panel43);
-        panel4.add(panel44);
-        panel4.add(panel45);
-        panel4.add(panel46);
-        add(panel4);
-
-
-
-        //Poner imagen fija del mono seleccionado
-
-        //Ir agregando labels dependiendo de lo que pasa Scroll Layout, ir agregando labels
-
-        //ImageIcon para los botones, flechas de movimiento en el cuarto panel
-
-        abajoImage = new ImageIcon("Desktop/Poo/Dinoland/Abajo.png");
-        arribaImage = new ImageIcon("Desktop/POO/Dinoland/Arriba.png");
-        izquierdaImage = new ImageIcon("Desktop/POO/Dinoland/Izquierda.png");
-        derechaImage = new ImageIcon("Desktop/POO/Dinoland/Derecha.png");
-
-        abajo = new JButton(abajoImage);
-        arriba = new JButton(arribaImage);
-        derecha = new JButton(derechaImage);
-        izquierda = new JButton(izquierdaImage);*/
-
-        abajo.addActionListener(new BotonListener()); 
-        abajo.setIcon(abajoImage);
-        arriba.addActionListener(new BotonListener());
-        arriba.setIcon(arribaImage);
-        izquierda.addActionListener(new BotonListener());
-        izquierda.setIcon(izquierdaImage);
-        derecha.addActionListener(new BotonListener());
-        derecha.setIcon(derechaImage);*/
-
-        panel42.add(arriba);
-        panel44.add(izquierda);
-        panel45.add(abajo);
-        panel46.add(derecha);
+                square2[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
+                
+                panel4.add(square2[i][j]);
+            }
+            
+        }
+        arriba = new JLabel("up");
+        square2[0][1].add(arriba);
+        abajo = new JLabel("down");
+        square2[2][0].add(abajo);
+        derecha = new JLabel("der");
+        square2[2][1].add(derecha);
+        izq= new JLabel("izq");
+        square2[1][1].add(izq);
+        add(panel4, BorderLayout.CENTER);
         setVisible(true);
     }
 
     public class BotonListener implements ActionListener{
-        public void actionPerformed(ActionEvent e){
-            System.out.println("Presionaste el Boton de: ");
+		public void actionPerformed(ActionEvent e){
+            if (e.getSource() == square2[0][1]) {
+                System.out.println("Presionaste arriba");
+            }else if (e.getSource() == square2[2][0]) {
+                System.out.println("Presionaste abajo");
+            }else if (e.getSource() == square2[1][1]) {
+                System.out.println("Presionaste izquierda");
+            }else if (e.getSource() == square2[2][1]) {
+                System.out.println("Presionaste derecha");
+            }
         }
     }
 }

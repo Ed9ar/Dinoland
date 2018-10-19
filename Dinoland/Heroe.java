@@ -1,29 +1,28 @@
 
-public class Heroe extends Personaje{
-	private String nombre;
+public abstract class Heroe extends Personaje{
 	private Item[] mochila;
 	//movimiento
 
-	public Heroe(int ataque,int defensa,int salud,int velocidad){
-		super(ataque,defensa,salud, velocidad);
+	public Heroe(int ataque,int defensa,int salud,int velocidad, String nombre){
+		super(ataque,defensa,salud, velocidad, nombre);
 		mochila= new Item[5];
 	}
 	
 
 	public void imprimeStats(){
-		System.out.println("Stats del heroe:"+nombre+" "
-			+getHp()
+		System.out.println("Stats del heroe:"+getNombre()+" "
+			+getSalud()
 			+" Ataque: "+getAtaque()
-			+" Defensa: "+ getDefensa()
-		);		
+			+" Defensa: "+ getDefensa());
 	}
 	
-	public void atacar(Villano v){
+	/*
+	public void atacar(Dinosaurio dinosaurio){
 		System.out.println("---Ataca el heroe---");
 		v.setHp(v.getHp()-getAtaque());
 		imprimeStats();
 		v.imprimeStats();
-	}
+	}*/
 	
 	public Item[] getMochila(){
 		return mochila;
@@ -51,11 +50,5 @@ public class Heroe extends Personaje{
 				System.out.println(i+".- Vacio");
 			}
 		}
-	}
-
-	public void caminar(){
-		//Implementar movimiento
-	}
-
-	
+	}	
 }

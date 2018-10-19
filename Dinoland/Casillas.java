@@ -10,7 +10,7 @@ public class Casillas extends JPanel{
     private Heroe heroe;
 
     public Dinosaurio getDinosaurio(){
-        return Dinosaurio;
+        return dinosaurio;
     }
 
     public void setDinosaurio(Dinosaurio dinosaurio){
@@ -18,15 +18,15 @@ public class Casillas extends JPanel{
     }
 
     public Item getItem(){
-        return Item;
+        return item;
     }
 
     public void setItem(Item item){
         this.item = item;
     }
 
-    public void Heroe(){
-        return Heroe;
+    public Heroe getHeroe(){
+        return heroe;
     }
 
     public void setHeroe(Heroe heroe){
