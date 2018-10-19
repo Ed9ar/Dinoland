@@ -1,7 +1,10 @@
-import Heroe;
-
 public class Manana extends Heroe{
-    public Manana(){
-        super(30,20,100, 5, "Manana");
-    }
+
+	//sobrecargar stats
+
+	public static void transformarAtaque(int velocidad, int ataque){
+
+	}
+
+
 }

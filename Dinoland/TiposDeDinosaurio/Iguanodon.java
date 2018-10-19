@@ -1,7 +1,15 @@
-import Dinosaurio;
-
 public class Iguanodon extends Dinosaurio{
-    public Iguanodon(){
-        super(10,10,100,5, "Iguanodon");
-    }
+	//Sobrecargar stats
+	private int navaja;
+
+	public void setNavaja(int navaja){
+		this.navaja = navaja;
+	}
+
+	public int getNavaja(){
+		return navaja;
+	}
+
+	
+
 }
