@@ -1,31 +1,14 @@
 
 public class Heroe extends Personaje{
 	private String nombre;
-	private int mana;
 	private Item[] mochila;
-	
-	public Heroe(int ataque,int defensa,int hp,String nombre,int mana){
-		super(ataque,defensa,hp);
+	//movimiento
+
+	public Heroe(int ataque,int defensa,int salud,int velocidad){
+		super(ataque,defensa,salud, velocidad);
 		mochila= new Item[5];
-		this.nombre=nombre;
-		this.mana=mana;
 	}
 	
-	public String getNombre(){
-		return nombre;
-	}
-	
-	public void setNombre(String nombre){
-		this.nombre=nombre;
-	}
-	
-	public int getMana(){
-		return mana;
-	}
-	
-	public void setMana(int mana){
-		this.mana=mana;
-	}
 
 	public void imprimeStats(){
 		System.out.println("Stats del heroe:"+nombre+" "
@@ -47,12 +30,17 @@ public class Heroe extends Personaje{
 	}
 	
 	
-	public void addItemAMochila(Item item, int index){
+	public void aniadirItem(Item item, int index){
 		mochila[index]=item; 
 	}
 	
-	public void removeItemDeMochila(int index){
+	public void soltarItem(int index){
 		mochila[index]=null;
+	}
+
+	public void usarItem(Item item, int index){
+		mochila[index]=null;
+		//mandar efecto en el juego
 	}
 	
 	public void imprimeMochila(){
@@ -64,5 +52,10 @@ public class Heroe extends Personaje{
 			}
 		}
 	}
+
+	public void caminar(){
+		//Implementar movimiento
+	}
+
 	
 }
