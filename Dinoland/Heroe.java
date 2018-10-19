@@ -1,10 +1,11 @@
 
 public abstract class Heroe extends Personaje{
 	private Item[] mochila;
+	private int mana;
 	//movimiento
 
-	public Heroe(int ataque,int defensa,int salud,int velocidad, String nombre){
-		super(ataque,defensa,salud, velocidad, nombre);
+	public Heroe(int ataque,int defensa,int salud,int velocidad, int mana,String nombre){
+		super(ataque,defensa,salud, velocidad, mana, nombre);
 		mochila= new Item[5];
 	}
 	
@@ -13,7 +14,7 @@ public abstract class Heroe extends Personaje{
 		System.out.println("Stats del heroe:"+getNombre()+" "
 			+getSalud()
 			+" Ataque: "+getAtaque()
-			+" Defensa: "+ getDefensa());
+			+" Defensa: "+ getDefensa()+ "Mana : " + getMana());
 	}
 	
 	/*
@@ -23,7 +24,7 @@ public abstract class Heroe extends Personaje{
 		imprimeStats();
 		v.imprimeStats();
 	}*/
-	
+
 	public Item[] getMochila(){
 		return mochila;
 	}

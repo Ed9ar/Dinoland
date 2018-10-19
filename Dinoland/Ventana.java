@@ -11,6 +11,7 @@ public class Ventana extends JFrame{
     private JButton[][] square2 = new JButton[3][2];
     private JPanel[][] square = new JPanel[5][5];
     private JLabel arriba, abajo, izq, derecha;
+    //Erguro erguro = new Erguro();
 
 
     public Ventana(){
@@ -85,6 +86,7 @@ public class Ventana extends JFrame{
         izq= new JLabel("izq");
         square2[1][1].add(izq);
         add(panel4, BorderLayout.CENTER);
+        
         setVisible(true);
     }
 
@@ -101,4 +103,6 @@ public class Ventana extends JFrame{
             }
         }
     }
+
+    //generar un heroe dependiendo del que se elija al iniciar el juego panel 3
 }

@@ -2,6 +2,6 @@ import Dinosaurio;
 
 public class TRex extends Dinosaurio{
     public TRex(){
-        super(10,10,100,5, "TRex");
+        super(20,20,200,5, 20,"TRex");
     }
 }

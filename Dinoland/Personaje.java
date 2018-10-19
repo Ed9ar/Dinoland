@@ -3,6 +3,7 @@ public abstract class Personaje implements Atacar{
 	private int ataque;
 	private int defensa;
 	private int salud;
+	private int mana;
 	private int velocidad;
 	private String nombre;
 	
@@ -14,20 +15,25 @@ public abstract class Personaje implements Atacar{
 	}
 	
 	
-	public Personaje(int ataque,int defensa,int salud, int velocidad, String nombre){
+	public Personaje(int ataque,int defensa,int salud, int velocidad, int mana,String nombre){
 		this.ataque=ataque;
 		this.defensa=defensa;
 		this.salud=salud;
 		this.velocidad=velocidad;
 		this.nombre = nombre;
+		this.mana = mana;
+	}
+
+
+	public void setMana(int mana){
+		this.mana = mana;
+	}
+	
+	public int getMana(){
+		return mana;
 	}
 
 	//atacar es un método abstracto, forzar implementación y sobreescribir para cada caso
-	@Override
-	public void atacar(Personaje personaje) {
-	}
-	public void atacar(Personaje personaje, Item item){	
-	}
 
 	public void setNombre(String nombre){
 		this.nombre = nombre;
@@ -61,5 +67,13 @@ public abstract class Personaje implements Atacar{
 
 	public int getVelocidad(){
 		return velocidad;
+	}
+
+	@Override
+	public void atacar(Personaje personaje) {
+		setSalud(getSalud()-(getAtaque()-getDefensa()));
+	}
+	public void atacar(Dinosaurio dinosaurio, Item item){	
+		setSalud(getSalud()-(getAtaque()+-getDefensa()-1));//+Item.getPuntos()
 	}
 }

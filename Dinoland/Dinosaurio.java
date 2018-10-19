@@ -4,8 +4,8 @@ public abstract class Dinosaurio extends Personaje{
 	private int tranquilizante;
 	private String informacion;
 
-	public Dinosaurio(int ataque,int defensa,int salud, int velocidad, String nombre){
-		super(ataque,defensa,salud,velocidad, nombre);
+	public Dinosaurio(int ataque,int defensa,int salud, int velocidad, int mana, String nombre){
+		super(ataque,defensa,salud,velocidad,mana, nombre);
 	}
 
 	public void setNivelDeEnojo(int nivelDeEnojo){
@@ -20,14 +20,13 @@ public abstract class Dinosaurio extends Personaje{
 	public int getTranquilizante(){
 		return tranquilizante;
 	}
-	/*
-	public void setInformacion(){
+	
+	public void setInformacion(String informacion){
 		this.informacion = informacion;
 	}
 
 	public String getInformacion(){
 		return informacion;
 	}
-*/
 
 }
