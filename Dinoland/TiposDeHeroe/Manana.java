@@ -16,8 +16,4 @@ public class Manana extends Heroe{
             System.out.println("No hay suficiente mana");
         }
     }
-
-    @Override
-    public void atacar(Dinosaurio dinosaurio) {
-    }
 }
