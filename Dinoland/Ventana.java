@@ -32,7 +32,7 @@ public class Ventana extends JFrame{
         panel1.setBorder(border1);
         panel1.setLayout(new GridLayout(5,5));
 
-
+        //generar objetos y meterlos a diferentes espacios en el mapa(Dinosaurios,Items,Heroe)
         for(int i = 0; i < 5; i++) {
             for(int j = 0; j < 5; j++) {
                 square[i][j] = new JPanel();
@@ -105,4 +105,6 @@ public class Ventana extends JFrame{
     }
 
     //generar un heroe dependiendo del que se elija al iniciar el juego panel 3
+    //hacer los escenarios de batalla
+    //recolección de items
 }
