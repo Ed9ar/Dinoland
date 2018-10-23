@@ -7,10 +7,11 @@ import java.awt.*;
 public class Ventana extends JFrame{
     private JPanel panel1, panel2,panel3,panel4;
     private JDialog border1, border2, border3, border4; 
-    private ImageIcon abajoImage, arribaImage, izquierdaImage, derechaImage;
+    private ImageIcon abajoImage, arribaImage, izquierdaImage, derechaImage, iguanodonImage, trexImage, velociraptorImage, stegosaurusImage;
     private JButton[][] square2 = new JButton[3][2];
     private JPanel[][] square = new JPanel[5][5];
-    private JLabel arriba, abajo, izq, derecha;
+    private JLabel arriba, abajo, izq, derecha, raptor,raptor2, raptor3, steg, steg2, tyr, ig, ig2;
+    
     //Erguro erguro = new Erguro();
 
 
@@ -43,6 +44,28 @@ public class Ventana extends JFrame{
             }
             
         }
+        velociraptorImage = new ImageIcon("raptor.png");
+        raptor = new JLabel(velociraptorImage);
+        raptor2 = new JLabel(velociraptorImage);
+        raptor3 = new JLabel(velociraptorImage);
+        square[4][3].add(raptor3);
+        square[2][0].add(raptor);
+        trexImage = new ImageIcon("Tyrannosaurio.png");
+        tyr = new JLabel(trexImage);
+        square[4][4].add(tyr);
+        iguanodonImage = new ImageIcon("iguanodon.png");
+        ig = new JLabel(iguanodonImage);
+        ig2 = new JLabel(iguanodonImage);
+        square[4][0].add(ig2);
+        square[1][4].add(ig);
+        stegosaurusImage = new ImageIcon("steg.png");
+        steg = new JLabel(stegosaurusImage);
+        steg2 = new JLabel(stegosaurusImage);
+        square[3][2].add(steg);
+        square[2][3].add(steg2);
+        square[0][3].add(raptor2);
+
+
         add(panel1, BorderLayout.CENTER);
 
         //revalidate
@@ -69,25 +92,38 @@ public class Ventana extends JFrame{
                 square2[i][j] = new JButton();
                 square2[i][j].addActionListener(new BotonListener());
                 square2[i][j].setLayout(new FlowLayout());
-                square2[i][j].setBackground(Color.ORANGE);
-
                 square2[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
-                
                 panel4.add(square2[i][j]);
             }
             
         }
-        arriba = new JLabel("up");
+
+        arribaImage = new ImageIcon("Arriba.png"); //arriba
+        arriba = new JLabel(arribaImage);
         square2[0][1].add(arriba);
-        abajo = new JLabel("down");
+        abajoImage = new ImageIcon("Abajo.png"); //abajo
+        abajo = new JLabel(abajoImage);
         square2[2][0].add(abajo);
-        derecha = new JLabel("der");
+        derechaImage = new ImageIcon("Derecha.png");//derecha
+        derecha = new JLabel(derechaImage);
         square2[2][1].add(derecha);
-        izq= new JLabel("izq");
+        izquierdaImage = new ImageIcon("Izquierda.png");
+        izq = new JLabel(izquierdaImage);
         square2[1][1].add(izq);
         add(panel4, BorderLayout.CENTER);
         
         setVisible(true);
+
+        Mapa Mapa = new Mapa(5,5);
+
+        for(int i = 0; i < 5; i++){
+            System.out.println();
+            for(int j = 0; j < 5; j++){
+                System.out.print(Mapa.casillas[i][j]);
+            }
+        }
+
+        //Poner componentes en las casillas del mapa (generarlos)
     }
 
     public class BotonListener implements ActionListener{
@@ -108,3 +144,4 @@ public class Ventana extends JFrame{
     //hacer los escenarios de batalla
     //recolección de items
 }
+

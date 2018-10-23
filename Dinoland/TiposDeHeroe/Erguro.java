@@ -6,8 +6,8 @@ public class Erguro extends Heroe{
         super(20,30,100, 10,40, "Erguro");
     }
 
-    public static void multiplicarStats(){
-        int mana = erguro.getMana();
+    public void multiplicarStats(){
+        int mana = getMana();
         if(mana >= 15){
             //Multiplicar Stats
             System.out.println("Multiplicando Stats");

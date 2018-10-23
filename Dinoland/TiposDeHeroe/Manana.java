@@ -4,8 +4,8 @@ public class Manana extends Heroe{
     public Manana(){
         super(30,20,100, 5,40, "Manana");
     }
-    public static void regeneracion(){
-        int mana = manana.getMana();
+    public void regeneracion(){
+        int mana = getMana();
         //Cambiar por Manana
         if(mana >= 40){
             //Multiplicar Stats
