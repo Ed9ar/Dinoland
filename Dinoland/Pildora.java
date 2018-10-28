@@ -1,4 +1,4 @@
-import Item;
+//import Item;
 
 public class Pildora extends Item{
     public Pildora(){

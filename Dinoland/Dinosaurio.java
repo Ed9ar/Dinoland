@@ -1,6 +1,6 @@
 public abstract class Dinosaurio extends Personaje{
 
-	private int nivelDeEnojo;
+	//private int nivelDeEnojo;
 	private int tranquilizante;
 	private String informacion;
 
@@ -8,7 +8,15 @@ public abstract class Dinosaurio extends Personaje{
 		super(ataque,defensa,salud,velocidad,mana, nombre);
 	}
 
-	public void setNivelDeEnojo(int nivelDeEnojo){
+	public void imprimeStats(){
+		System.out.println("Stats del Dinosaurio:"+getNombre()+" Salud: "
+			+getSalud()
+			+" Ataque: "+getAtaque()
+			+" Defensa: "+ getDefensa());
+	}
+	
+
+	/*public void setNivelDeEnojo(int nivelDeEnojo){
 		this.nivelDeEnojo=nivelDeEnojo;
 	}
 	public int getNivelDeEnojo(){
@@ -19,7 +27,7 @@ public abstract class Dinosaurio extends Personaje{
 	}
 	public int getTranquilizante(){
 		return tranquilizante;
-	}
+	}*/
 	
 	public void setInformacion(String informacion){
 		this.informacion = informacion;

@@ -1,4 +1,4 @@
-import Heroe;
+//import Heroe;
 
 public class Erguro extends Heroe{
 
@@ -11,7 +11,7 @@ public class Erguro extends Heroe{
         if(mana >= 15){
             //Multiplicar Stats
             System.out.println("Multiplicando Stats");
-            erguro.setMana(mana-15);
+            //erguro.setMana(mana-15);
         }
         else{
             System.out.println("No hay suficiente mana");

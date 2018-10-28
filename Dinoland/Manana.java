@@ -1,4 +1,4 @@
-import Heroe;
+//import Heroe;
 
 public class Manana extends Heroe{
     public Manana(){
@@ -10,7 +10,7 @@ public class Manana extends Heroe{
         if(mana >= 40){
             //Multiplicar Stats
             System.out.println("Has recuperado todos tus stats");
-            erguro.setMana(0);
+            //erguro.setMana(0);
         }
         else{
             System.out.println("No hay suficiente mana");

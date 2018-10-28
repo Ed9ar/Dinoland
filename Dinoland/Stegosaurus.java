@@ -1,4 +1,4 @@
-import Dinosaurio;
+//import Dinosaurio;
 
 public class Stegosaurus extends Dinosaurio{
     public Stegosaurus(){

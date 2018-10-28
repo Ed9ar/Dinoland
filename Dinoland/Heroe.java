@@ -11,7 +11,7 @@ public abstract class Heroe extends Personaje{
 	
 
 	public void imprimeStats(){
-		System.out.println("Stats del heroe:"+getNombre()+" "
+		System.out.println("Stats del heroe:"+getNombre()+" Salud: "
 			+getSalud()
 			+" Ataque: "+getAtaque()
 			+" Defensa: "+ getDefensa()+ "Mana : " + getMana());
@@ -40,7 +40,7 @@ public abstract class Heroe extends Personaje{
 
 	public void usarItem(Item item, int index){
 		mochila[index]=null;
-		//mandar efecto en el juego
+		//mandar efecto en el juego if item de tipo salud puntos salud, if tipo ataque puntos ataque, igual para Mana puntos mana
 	}
 	
 	public void imprimeMochila(){

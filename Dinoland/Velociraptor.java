@@ -1,4 +1,4 @@
-import Dinosaurio;
+//import Dinosaurio;
 
 public class Velociraptor extends Dinosaurio{
     private int manada;

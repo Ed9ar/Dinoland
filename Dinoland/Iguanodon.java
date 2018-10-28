@@ -1,4 +1,4 @@
-import Dinosaurio;
+//import Dinosaurio;
 
 public class Iguanodon extends Dinosaurio{
     private int navaja;

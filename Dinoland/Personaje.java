@@ -17,6 +17,7 @@ public abstract class Personaje implements Atacar{
 	
 	
 	public Personaje(int ataque,int defensa,int salud, int velocidad, int mana,String nombre){
+		//super("Personaje");
 		this.ataque=ataque;
 		this.defensa=defensa;
 		this.salud=salud;
@@ -72,9 +73,10 @@ public abstract class Personaje implements Atacar{
 
 	@Override
 	public void atacar(Personaje personaje) {
-		personaje.setSalud(personaje.getSalud()-(getAtaque()-personaje.getDefensa()));
+		personaje.setSalud(personaje.getSalud()-(getAtaque()-(personaje.getDefensa()/4)));
 	}
-	public void atacar(Personaje dinosaurio, Item item){ //Solo dinosaurio	
+	
+	/*public void atacar(Personaje dinosaurio, Item item){ //Solo dinosaurio	
 		dinosaurio.setSalud(dinosaurio.getSalud()-(getAtaque()-dinosaurio.getDefensa()-1));//+Item.getPuntos()
-	}
+	}*/
 }
