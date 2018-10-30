@@ -4,17 +4,36 @@ import javax.swing.border.TitledBorder;
 import java.awt.event.*;
 //import TiposDeDinosaurio.TRex.*;
 import java.awt.*;
+import java.util.Random;
+
 
 public class Ventana extends JFrame{
     private JPanel panel1, panel2,panel3,panel4, character, victoriap, derrotap;
     private int ei = 0, ej = 0, seleccion;
     private JDialog border1, border2, border3, border4, border5; 
+    private JComboBox  siono;
     private ImageIcon abajoImage, arribaImage, izquierdaImage, derechaImage, iguanodonImage, trexImage, velociraptorImage, stegosaurusImage, erguroImage, truthImage, mananaImage, victoriaImage, derrotaImage, heImage;
     private JButton[][] square2 = new JButton[3][2];
     private JButton[][] cselect = new JButton[3][1];
     private JPanel[][] square = new JPanel[5][5];
-    private JLabel arriba, abajo, izq, derecha, raptor,raptor2, raptor3, steg, steg2, tyr, ig, ig2, mananac, erguro, truth, derrota, perdiste, victoria, he, ganaste;
-    
+    private JScrollPane scrollPane;
+    private JLabel arriba, abajo, izq, derecha, raptor,raptor2, raptor3, steg, steg2, tyr, ig, ig2, mananac, ergurol, truthl, derrota, perdiste, victoria, he, ganaste, accion;
+    //Generar Mapa y objetos en el mapa
+    Mapa mapa = new Mapa(5,5);
+    Dinosaurio trex = new TRex();
+    Dinosaurio iguanodon = new Iguanodon();
+    Dinosaurio velociraptor = new Velociraptor();
+    Dinosaurio stegosaurio = new Stegosaurus();
+    Item adrenalina = new Adrenalina();
+    Item agua = new Agua();
+    Item dardos = new Dardos();
+    Item llave = new Llave();
+    Item machete = new Machete();
+    Item pildora = new Pildora();
+    Item sangre = new SangreP();
+    Truth truth = new Truth();
+    Heroe erguro = new Erguro();
+    Heroe manana = new Manana();
     //Erguro erguro = new Erguro();
 
 
@@ -41,20 +60,22 @@ public class Ventana extends JFrame{
         character.setBorder(border5);
 
         erguroImage = new ImageIcon("Erguro.jpeg"); //abajo
-        erguro = new JLabel(erguroImage);
-        cselect[0][0].add(erguro);
+        ergurol = new JLabel(erguroImage);
+        cselect[0][0].add(ergurol);
         mananaImage = new ImageIcon("Mananac.jpeg");//derecha
         mananac = new JLabel(mananaImage);
         cselect[1][0].add(mananac);
         truthImage = new ImageIcon("Truth.gif");
-        truth = new JLabel(truthImage);
-        cselect[2][0].add(truth);
+        truthl = new JLabel(truthImage);
+        cselect[2][0].add(truthl);
         add(character, BorderLayout.CENTER);
 
         setVisible(true);
         //añadir acciones al action listener crear al heroe dependiendo de lo que se haya elegido
         
     }
+
+    //Validar contenido de casillas en mapa de objetos, no en mapa gráfico
 
     public void initComponents(){
         remove(character);
@@ -80,10 +101,6 @@ public class Ventana extends JFrame{
             }
             
         }
-
-        Truth truth = new Truth();
-        Heroe erguro = new Erguro();
-        Heroe manana = new Manana();
 
         if(seleccion == 0){
             heImage = new ImageIcon("Erguro.jpeg");
@@ -136,11 +153,17 @@ public class Ventana extends JFrame{
         panel2.setLayout(new FlowLayout());
         panel2.setBorder(border2);
         add(panel2);
+
         panel3 = new JPanel();
         TitledBorder border3 = new TitledBorder("Acciones");
         panel3.setLayout(new FlowLayout());
         panel3.setBorder(border3);
-        add(panel3);
+        scrollPane = new JScrollPane(panel3);
+        accion = new JLabel();
+        scrollPane.add(accion);
+        add(scrollPane);
+        
+
         panel4 = new JPanel();
         TitledBorder border4 = new TitledBorder("Movimiento");
         //panel4.setLayout(new FlowLayout());
@@ -172,21 +195,13 @@ public class Ventana extends JFrame{
         izq = new JLabel(izquierdaImage);
         square2[1][1].add(izq);
         add(panel4, BorderLayout.CENTER);
-    
-        //Generar Mapa y objetos en el mapa
-        Mapa mapa = new Mapa(5,5);
-        Dinosaurio trex = new TRex();
-        Dinosaurio iguanodon = new Iguanodon();
-        Dinosaurio velociraptor = new Velociraptor();
-        Dinosaurio stegosaurio = new Stegosaurus();
-        Item adrenalina = new Adrenalina();
-        Item agua = new Agua();
-        Item dardos = new Dardos();
-        Item llave = new Llave();
-        Item machete = new Machete();
-        Item pildora = new Pildora();
-        Item sangre = new SangreP();
+        
+        revalidate();
+        repaint();       
+        setVisible(true);
+    }
 
+    public void inc(int x, int y){
         //Llenar el mapa
         for(int i = 0; i < 5; i++){
             System.out.println();
@@ -220,6 +235,28 @@ public class Ventana extends JFrame{
                             
                         }
                     }
+                    else{
+                        Random rand = new Random();
+                        int  n = rand.nextInt(6) + 1;
+                        if(n == 1){
+                            mapa.casillas[i][j].setItem(agua);
+                        }
+                        else if(n == 2){
+                            mapa.casillas[i][j].setItem(dardos);
+                        }
+                        else if(n == 3){
+                            mapa.casillas[i][j].setItem(sangre);
+                        }
+                        else if(n == 4){
+                            mapa.casillas[i][j].setItem(adrenalina);
+                        }
+                        else if(n == 5){
+                            mapa.casillas[i][j].setItem(machete);
+                        }
+                        else{
+                            mapa.casillas[i][j].setItem(pildora);
+                        }
+                    }
                 }
                 if(mapa.getCasillas()[i][j].getDinosaurio() != null){
                     System.out.print(mapa.getCasillas()[i][j].getDinosaurio());
@@ -234,34 +271,40 @@ public class Ventana extends JFrame{
         }
         //Así conseguir y editar la info del Heroe
         //mapa.getCasillas()[4][4].getDinosaurio().setSalud(0);
-        mapa.getCasillas()[0][0].getHeroe().imprimeStats();
-        System.out.println();
-        trex.imprimeStats();
-        
-        //Método de pelea, otra ventana y preguntas
 
-        //Método añadir cosas a la mochila array de botones y usar items
+            //JScrollPane ir poniendo los labels de la historia
 
-        //JScrollPane ir poniendo los labels de la historia
-
-        //Remover cosas del mapa si se recogen o si vence a los dinosaurios
-
-        //Otorgar victoria o derrota
-        
-        if(mapa.getCasillas()[4][4].getDinosaurio().getSalud() == 0){
-            System.out.println("FELICIDADES GANASTE");
-            victoria();
-            trex.imprimeStats();
-        }
-        else if(mapa.getCasillas()[0][0].getHeroe().getSalud() == 0){
-            System.out.println("Perdiste");
-            derrota();
             mapa.getCasillas()[0][0].getHeroe().imprimeStats();
-        }
+            System.out.println();
+            trex.imprimeStats();
+            
+            //Método de pelea, otra ventana y preguntas
 
-        revalidate();
-        repaint();       
-        setVisible(true);
+            //Método añadir cosas a la mochila array de botones y usar items
+
+            //Remover cosas del mapa si se recogen o si vence a los dinosaurios
+
+            //Otorgar victoria o derrota
+            
+            if(mapa.getCasillas()[4][4].getDinosaurio().getSalud() == 0){
+                System.out.println("FELICIDADES GANASTE");
+                victoria();
+                trex.imprimeStats();
+            }
+            else if(mapa.getCasillas()[0][0].getHeroe().getSalud() == 0){
+                System.out.println("Perdiste");
+                derrota();
+                mapa.getCasillas()[0][0].getHeroe().imprimeStats();
+            }
+        System.out.println(" i: " + x + " j:" + y);
+        if(mapa.getCasillas()[x][y].getDinosaurio() != null){
+        System.out.println("Aqui hay un " + mapa.casillas[x][y].getDinosaurio().getNombre());
+        accion = new JLabel("Te has topado con un " + mapa.casillas[x][y].getDinosaurio().getNombre() + "es momento de pelear");
+        }
+        else if(mapa.getCasillas()[x][y].getItem() != null){
+        System.out.println("Aqui hay un " + mapa.casillas[x][y].getItem().getNombre());
+        accion = new JLabel("Has encontrado un " + mapa.casillas[ei][ej].getItem().getNombre() + " ¿Te gustaría recogerlo?");
+        }
     }
 
     public void victoria(){
@@ -307,46 +350,50 @@ public class Ventana extends JFrame{
 		public void actionPerformed(ActionEvent e){
             if (e.getSource() == square2[0][1]) {
                 ei--;
+                inc(ei, ej);
                 square[ei][ej].remove(he);
                 repaint();
                 revalidate();
                 square[ei][ej].add(he);
-                System.out.println("Presionaste arriba");
+                //System.out.println("Presionaste arriba");
                 
             }else if (e.getSource() == square2[2][0]) {
-                System.out.println("Presionaste abajo");
+                //System.out.println("Presionaste abajo");
                 ei++;
+                inc(ei, ej);
                 square[ei][ej].remove(he);
                 repaint();
                 revalidate();
                 square[ei][ej].add(he);
             }else if (e.getSource() == square2[1][1]) {
                 ej--;
+                inc(ei, ej);
                 square[ei][ej].remove(he);
                 repaint();
                 revalidate();
                 square[ei][ej].add(he);
-                System.out.println("Presionaste izquierda");
+                //System.out.println("Presionaste izquierda");
             }else if (e.getSource() == square2[2][1]) {
                 ej++;
+                inc(ei, ej);
                 square[ei][ej].remove(he);
                 repaint();
                 revalidate();
                 square[ei][ej].add(he);
-                System.out.println("Presionaste derecha");
+                //System.out.println("Presionaste derecha");
             }
             else if(e.getSource() == cselect[0][0]){
-                System.out.println("Has seleccionado a Erguro");
+                //System.out.println("Has seleccionado a Erguro");
                 seleccion = 0;
                 initComponents(); 
             }
             else if(e.getSource() == cselect[1][0]){
-                System.out.println("Has seleccionado a Manana");
+                //System.out.println("Has seleccionado a Manana");
                 seleccion = 1;
                 initComponents(); 
             }
             else if(e.getSource() == cselect[2][0]){
-                System.out.println("Has seleccionado a Truth");
+                //System.out.println("Has seleccionado a Truth");
                 seleccion = 2;
                 initComponents(); 
             }           

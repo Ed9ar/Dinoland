@@ -7,15 +7,6 @@ public abstract class Personaje implements Atacar{
 	private int velocidad;
 	private String nombre;
 	
-	
-	/*public Personaje(){
-		ataque=1;
-		defensa=0;
-		salud=100;
-		velocidad = 0;
-	}*/
-	
-	
 	public Personaje(int ataque,int defensa,int salud, int velocidad, int mana,String nombre){
 		//super("Personaje");
 		this.ataque=ataque;
