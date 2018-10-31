@@ -29,6 +29,9 @@ public abstract class Heroe extends Personaje{
 		return mochila;
 	}
 	
+	public void setMochila(Item item, int index){
+		mochila[index] = item;
+	}
 	
 	public void aniadirItem(Item item, int index){
 		mochila[index]=item; 
@@ -42,14 +45,4 @@ public abstract class Heroe extends Personaje{
 		mochila[index]=null;
 		//mandar efecto en el juego if item de tipo salud puntos salud, if tipo ataque puntos ataque, igual para Mana puntos mana
 	}
-	
-	public void imprimeMochila(){
-		for(int i=0;i<mochila.length;i++){
-			if(mochila[i]!=null){
-				System.out.println(i+".- "+mochila[i].getNombre());
-			}else{
-				System.out.println(i+".- Vacio");
-			}
-		}
-	}	
 }

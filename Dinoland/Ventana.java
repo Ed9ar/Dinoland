@@ -9,9 +9,12 @@ import java.util.Random;
 
 public class Ventana extends JFrame{
     private JPanel panel1, panel2,panel3,panel4, character, victoriap, derrotap;
+    private String respuesta;
+    private int x,y;
+    private int i;
     private int ei = 0, ej = 0, seleccion;
     private JDialog border1, border2, border3, border4, border5; 
-    private JComboBox  siono;
+    private JButton  siono;
     private ImageIcon abajoImage, arribaImage, izquierdaImage, derechaImage, iguanodonImage, trexImage, velociraptorImage, stegosaurusImage, erguroImage, truthImage, mananaImage, victoriaImage, derrotaImage, heImage;
     private JButton[][] square2 = new JButton[3][2];
     private JButton[][] cselect = new JButton[3][1];
@@ -156,7 +159,7 @@ public class Ventana extends JFrame{
 
         panel3 = new JPanel();
         TitledBorder border3 = new TitledBorder("Acciones");
-        panel3.setLayout(new FlowLayout());
+        panel3.setLayout(new GridLayout(1000,1));
         panel3.setBorder(border3);
         scrollPane = new JScrollPane(panel3);
         accion = new JLabel();
@@ -296,14 +299,35 @@ public class Ventana extends JFrame{
                 derrota();
                 mapa.getCasillas()[0][0].getHeroe().imprimeStats();
             }
-        System.out.println(" i: " + x + " j:" + y);
+        
+        //System.out.println(" i: " + x + " j:" + y);
+        
+
+        //Panel de batlla y añadir lo de los ITEMS a la mochila
+
         if(mapa.getCasillas()[x][y].getDinosaurio() != null){
-        System.out.println("Aqui hay un " + mapa.casillas[x][y].getDinosaurio().getNombre());
-        accion = new JLabel("Te has topado con un " + mapa.casillas[x][y].getDinosaurio().getNombre() + "es momento de pelear");
+            accion = new JLabel("\n");
+            panel3.add(accion);
+            //System.out.println("Aqui hay un " + mapa.casillas[x][y].getDinosaurio().getNombre());
+            accion = new JLabel("Te has topado con un " + mapa.casillas[x][y].getDinosaurio().getNombre() + "es momento de pelear");
+            panel3.add(accion);
+            repaint();
+            revalidate();
         }
         else if(mapa.getCasillas()[x][y].getItem() != null){
-        System.out.println("Aqui hay un " + mapa.casillas[x][y].getItem().getNombre());
-        accion = new JLabel("Has encontrado un " + mapa.casillas[ei][ej].getItem().getNombre() + " ¿Te gustaría recogerlo?");
+            accion = new JLabel("\n");
+            panel3.add(accion);
+            accion = new JLabel("Has encontrado un " + mapa.casillas[ei][ej].getItem().getNombre() + " ¿Te gustaría recogerlo?");
+            panel3.add(accion);
+            siono = new JButton("Pick");
+            siono.addActionListener(new BotonListener());
+            panel3.add(siono);
+            repaint();
+            revalidate();
+        }
+        
+        for(int i = 0; i < 5; i++){
+            System.out.println(mapa.casillas[0][0].getHeroe().getMochila());
         }
     }
 
@@ -396,7 +420,16 @@ public class Ventana extends JFrame{
                 //System.out.println("Has seleccionado a Truth");
                 seleccion = 2;
                 initComponents(); 
-            }           
+            }
+            //Esto es para añadir items
+            else if(e.getSource() == siono){
+                System.out.println("Recogiste Item");
+                for(int i = 0; i < 5; i++){
+                    if(mapa.casillas[0][0].getHeroe().getMochila()[i] == null){
+                        mapa.casillas[0][0].getHeroe().setMochila(mapa.casillas[x][y].getItem(), i);
+                    }
+                }
+            }      
         }
     }
 
