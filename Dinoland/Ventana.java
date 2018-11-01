@@ -10,7 +10,6 @@ import java.util.Random;
 public class Ventana extends JFrame{
     private JPanel panel1, panel2,panel3,panel4, character, victoriap, derrotap;
     private String respuesta;
-    private int x,y;
     private int i;
     private int ei = 0, ej = 0, seleccion;
     private JDialog border1, border2, border3, border4, border5; 
@@ -317,6 +316,7 @@ public class Ventana extends JFrame{
         else if(mapa.getCasillas()[x][y].getItem() != null){
             accion = new JLabel("\n");
             panel3.add(accion);
+            System.out.println("Aqui hay un " + mapa.casillas[x][y].getItem().getNombre());
             accion = new JLabel("Has encontrado un " + mapa.casillas[ei][ej].getItem().getNombre() + " ¿Te gustaría recogerlo?");
             panel3.add(accion);
             siono = new JButton("Pick");
@@ -325,10 +325,7 @@ public class Ventana extends JFrame{
             repaint();
             revalidate();
         }
-        
-        for(int i = 0; i < 5; i++){
-            System.out.println(mapa.casillas[0][0].getHeroe().getMochila());
-        }
+    
     }
 
     public void victoria(){
@@ -421,14 +418,14 @@ public class Ventana extends JFrame{
                 seleccion = 2;
                 initComponents(); 
             }
-            //Esto es para añadir items
+            //Esto es para añadir items 
             else if(e.getSource() == siono){
                 System.out.println("Recogiste Item");
-                for(int i = 0; i < 5; i++){
-                    if(mapa.casillas[0][0].getHeroe().getMochila()[i] == null){
-                        mapa.casillas[0][0].getHeroe().setMochila(mapa.casillas[x][y].getItem(), i);
-                    }
-                }
+                accion = new JLabel("Recogiste un " + mapa.getCasillas()[ei][ej].getItem().getNombre());
+                panel3.add(accion);
+                System.out.println(mapa.getCasillas()[ei][ej].getItem());
+                mapa.getCasillas()[0][0].getHeroe().aniadirItem(mapa.getCasillas()[ei][ej].getItem());
+                mapa.getCasillas()[0][0].getHeroe().imprimirMochila();
             }      
         }
     }

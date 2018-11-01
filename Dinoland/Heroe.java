@@ -2,6 +2,7 @@
 public abstract class Heroe extends Personaje{
 	private Item[] mochila;
 	private int mana;
+	private int counter;
 	//movimiento
 
 	public Heroe(int ataque,int defensa,int salud,int velocidad, int mana,String nombre){
@@ -29,12 +30,14 @@ public abstract class Heroe extends Personaje{
 		return mochila;
 	}
 	
-	public void setMochila(Item item, int index){
-		mochila[index] = item;
-	}
-	
-	public void aniadirItem(Item item, int index){
-		mochila[index]=item; 
+	public void aniadirItem(Item item){
+		counter = 0;
+		for(int i = 0; i < 5; i++){
+			if(mochila[i] == null && counter < 1){
+				mochila[i]=item; 
+				counter++;
+			}
+		}
 	}
 	
 	public void soltarItem(int index){
@@ -44,5 +47,11 @@ public abstract class Heroe extends Personaje{
 	public void usarItem(Item item, int index){
 		mochila[index]=null;
 		//mandar efecto en el juego if item de tipo salud puntos salud, if tipo ataque puntos ataque, igual para Mana puntos mana
+	}
+
+	public void imprimirMochila(){
+		for(int i = 0; i < 5; i++){
+			System.out.println(mochila[i]);
+		}
 	}
 }
