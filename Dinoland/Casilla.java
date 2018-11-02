@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.awt.*;
 
 //Atacar, la implementa personaje y recibe un Personaje parametro
-public class Casillas{
+public class Casilla{
     private Dinosaurio dinosaurio;
     private Item item;
     private Heroe heroe;

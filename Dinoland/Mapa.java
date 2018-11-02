@@ -7,13 +7,13 @@ public class Mapa{
 
 
     */
-    public Casillas[][] casillas;
+    public Casilla[][] casillas;
 
     public Mapa(int filas, int columnas){
-        casillas = new Casillas[filas][columnas];
+        casillas = new Casilla[filas][columnas];
     }
 
-    public Casillas[][] getCasillas(){
+    public Casilla[][] getCasillas(){
         return casillas;
     }
 

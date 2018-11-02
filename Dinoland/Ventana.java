@@ -10,7 +10,7 @@ import java.util.Random;
 public class Ventana extends JFrame{
     private JPanel panel1, panel2,panel3,panel4, character, victoriap, derrotap;
     private String respuesta;
-    private int i;
+    private int i, counter;
     private int ei = 0, ej = 0, seleccion;
     private JDialog border1, border2, border3, border4, border5; 
     private JButton  siono;
@@ -18,8 +18,12 @@ public class Ventana extends JFrame{
     private JButton[][] square2 = new JButton[3][2];
     private JButton[][] cselect = new JButton[3][1];
     private JPanel[][] square = new JPanel[5][5];
+    private JPanel[][] moch = new JPanel[1][5];
+    private JButton usar;
+    private JButton soltar;
+    private JPanel info, mochila;
     private JScrollPane scrollPane;
-    private JLabel arriba, abajo, izq, derecha, raptor,raptor2, raptor3, steg, steg2, tyr, ig, ig2, mananac, ergurol, truthl, derrota, perdiste, victoria, he, ganaste, accion;
+    private JLabel arriba, abajo, item, mochl, izq, derecha, raptor,raptor2, raptor3, steg, steg2, tyr, ig, ig2, mananac, ergurol, truthl, derrota, perdiste, victoria, he, ganaste, accion;
     //Generar Mapa y objetos en el mapa
     Mapa mapa = new Mapa(5,5);
     Dinosaurio trex = new TRex();
@@ -152,8 +156,34 @@ public class Ventana extends JFrame{
 
         panel2 = new JPanel();
         TitledBorder border2 = new TitledBorder("Personaje");
-        panel2.setLayout(new FlowLayout());
+        panel2.setLayout(new GridLayout(2,1));
+        info = new JPanel();
+        mochila = new JPanel();
+        mochl = new JLabel("MOCHILA");
+        mochila.add(mochl);
+        for(int i = 0; i < 1; i++) {
+            for(int j = 0; j < 5; j++) {
+                moch[i][j] = new JPanel();
+                //item = new JLabel(mapa.getCasillas()[0][0].getHeroe().getMochila()[j].getItem().getNombre());
+                //moch[i][j].add(item);
+                usar = new JButton("Usar");
+                usar.addActionListener(new BotonListener());
+                soltar = new JButton("Soltar");
+                soltar.addActionListener(new BotonListener());
+                moch[i][j].add(usar);
+                moch[i][j].add(soltar);
+                moch[i][j].setLayout(new GridLayout(2,1));
+                moch[i][j].setBackground(Color.ORANGE);
+                moch[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
+                mochila.add(moch[i][j]);
+            }
+            
+        }
+        mochila.setBorder(BorderFactory.createLineBorder(Color.black));
+        info.setBorder(BorderFactory.createLineBorder(Color.black));
         panel2.setBorder(border2);
+        panel2.add(info);
+        panel2.add(mochila);
         add(panel2);
 
         panel3 = new JPanel();
@@ -161,9 +191,10 @@ public class Ventana extends JFrame{
         panel3.setLayout(new GridLayout(1000,1));
         panel3.setBorder(border3);
         scrollPane = new JScrollPane(panel3);
-        accion = new JLabel();
+        accion = new JLabel("Bienvenido a Dinoland");
         scrollPane.add(accion);
         add(scrollPane);
+        panel3.add(accion);
         
 
         panel4 = new JPanel();
@@ -209,7 +240,7 @@ public class Ventana extends JFrame{
             System.out.println();
             for(int j = 0; j < 5; j++){
                 if(mapa.getCasillas()[i][j] == null){
-                    mapa.casillas[i][j] = new Casillas();
+                    mapa.casillas[i][j] = new Casilla();
                     if(i == 4 && j == 4){
                         mapa.casillas[i][j].setDinosaurio(trex);
                     }
@@ -271,6 +302,7 @@ public class Ventana extends JFrame{
                 }
             }
         }
+
         //Así conseguir y editar la info del Heroe
         //mapa.getCasillas()[4][4].getDinosaurio().setSalud(0);
 
@@ -299,11 +331,6 @@ public class Ventana extends JFrame{
                 mapa.getCasillas()[0][0].getHeroe().imprimeStats();
             }
         
-        //System.out.println(" i: " + x + " j:" + y);
-        
-
-        //Panel de batlla y añadir lo de los ITEMS a la mochila
-
         if(mapa.getCasillas()[x][y].getDinosaurio() != null){
             accion = new JLabel("\n");
             panel3.add(accion);
@@ -325,7 +352,6 @@ public class Ventana extends JFrame{
             repaint();
             revalidate();
         }
-    
     }
 
     public void victoria(){
@@ -426,6 +452,13 @@ public class Ventana extends JFrame{
                 System.out.println(mapa.getCasillas()[ei][ej].getItem());
                 mapa.getCasillas()[0][0].getHeroe().aniadirItem(mapa.getCasillas()[ei][ej].getItem());
                 mapa.getCasillas()[0][0].getHeroe().imprimirMochila();
+                //Poner JLabels a la mochila
+                for(int i = 0; i < 1; i++){
+                    for(int j = 0; j < 5; j++){
+                        item = new JLabel(mapa.getCasillas()[ei][ej].getItem().getNombre());
+                        moch[i][j].add(item);                                   
+                    }
+                }
             }      
         }
     }
