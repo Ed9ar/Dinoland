@@ -10,7 +10,6 @@ public abstract class Heroe extends Personaje{
 		mochila= new Item[5];
 	}
 	
-
 	public void imprimeStats(){
 		System.out.println("Stats del heroe:"+getNombre()+" Salud: "
 			+getSalud()
@@ -32,7 +31,7 @@ public abstract class Heroe extends Personaje{
 	
 	public void aniadirItem(Item item){
 		counter = 0;
-		for(int i = 0; i < 5; i++){
+		for(int i = 0; i < 4; i++){
 			if(mochila[i] == null && counter < 1){
 				mochila[i]=item; 
 				counter++;

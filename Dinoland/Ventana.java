@@ -1,5 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import java.io.*;
+//import org.graalvm.compiler.hotspot.stubs.OutOfBoundsExceptionStub;
+
 //import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
 import java.awt.event.*;
 //import TiposDeDinosaurio.TRex.*;
@@ -85,7 +88,7 @@ public class Ventana extends JFrame{
 
     public void initComponents(){
         remove(character);
-        setSize(800,800);
+        setSize(900,900);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
 	    panel1 = new JPanel();
@@ -162,7 +165,7 @@ public class Ventana extends JFrame{
         mochl = new JLabel("MOCHILA");
         mochila.add(mochl);
         for(int i = 0; i < 1; i++) {
-            for(int j = 0; j < 5; j++) {
+            for(int j = 0; j < 4; j++) {
                 moch[i][j] = new JPanel();
                 //item = new JLabel(mapa.getCasillas()[0][0].getHeroe().getMochila()[j].getItem().getNombre());
                 //moch[i][j].add(item);
@@ -269,8 +272,10 @@ public class Ventana extends JFrame{
                         }
                     }
                     else{
+                        /*
                         Random rand = new Random();
-                        int  n = rand.nextInt(6) + 1;
+                        int  n = rand.nextInt(6) + 1;*/
+                        int n = Mapa.calcularProbabilidad();
                         if(n == 1){
                             mapa.casillas[i][j].setItem(agua);
                         }
@@ -291,31 +296,11 @@ public class Ventana extends JFrame{
                         }
                     }
                 }
-                if(mapa.getCasillas()[i][j].getDinosaurio() != null){
-                    System.out.print(mapa.getCasillas()[i][j].getDinosaurio());
-                }
-                else if(mapa.getCasillas()[i][j].getItem() != null){
-                    System.out.println(mapa.getCasillas()[i][j].getItem());
-                }
-                else{
-                    System.out.println(mapa.getCasillas()[i][j].getHeroe());
-                }
             }
         }
-
-        //Así conseguir y editar la info del Heroe
-        //mapa.getCasillas()[4][4].getDinosaurio().setSalud(0);
-
-            //JScrollPane ir poniendo los labels de la historia
-
             mapa.getCasillas()[0][0].getHeroe().imprimeStats();
             System.out.println();
             trex.imprimeStats();
-            
-            //Método de pelea, otra ventana y preguntas
-
-            //Método añadir cosas a la mochila array de botones y usar items
-
             //Remover cosas del mapa si se recogen o si vence a los dinosaurios
 
             //Otorgar victoria o derrota
@@ -349,6 +334,14 @@ public class Ventana extends JFrame{
             siono = new JButton("Pick");
             siono.addActionListener(new BotonListener());
             panel3.add(siono);
+            repaint();
+            revalidate();
+        }
+        else{
+            accion = new JLabel("\n");
+            panel3.add(accion);
+            accion = new JLabel("Ya has vacíado esta casilla");
+            panel3.add(accion);
             repaint();
             revalidate();
         }
@@ -395,76 +388,97 @@ public class Ventana extends JFrame{
     //Con esto se mueve el tipin, solo se mueve la imagen, el objeto permanece en la misma casilla
     public class BotonListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-            if (e.getSource() == square2[0][1]) {
-                ei--;
-                inc(ei, ej);
-                square[ei][ej].remove(he);
-                repaint();
-                revalidate();
-                square[ei][ej].add(he);
-                //System.out.println("Presionaste arriba");
-                
-            }else if (e.getSource() == square2[2][0]) {
-                //System.out.println("Presionaste abajo");
-                ei++;
-                inc(ei, ej);
-                square[ei][ej].remove(he);
-                repaint();
-                revalidate();
-                square[ei][ej].add(he);
-            }else if (e.getSource() == square2[1][1]) {
-                ej--;
-                inc(ei, ej);
-                square[ei][ej].remove(he);
-                repaint();
-                revalidate();
-                square[ei][ej].add(he);
-                //System.out.println("Presionaste izquierda");
-            }else if (e.getSource() == square2[2][1]) {
-                ej++;
-                inc(ei, ej);
-                square[ei][ej].remove(he);
-                repaint();
-                revalidate();
-                square[ei][ej].add(he);
-                //System.out.println("Presionaste derecha");
-            }
-            else if(e.getSource() == cselect[0][0]){
-                //System.out.println("Has seleccionado a Erguro");
-                seleccion = 0;
-                initComponents(); 
-            }
-            else if(e.getSource() == cselect[1][0]){
-                //System.out.println("Has seleccionado a Manana");
-                seleccion = 1;
-                initComponents(); 
-            }
-            else if(e.getSource() == cselect[2][0]){
-                //System.out.println("Has seleccionado a Truth");
-                seleccion = 2;
-                initComponents(); 
-            }
-            //Esto es para añadir items 
-            else if(e.getSource() == siono){
-                System.out.println("Recogiste Item");
-                accion = new JLabel("Recogiste un " + mapa.getCasillas()[ei][ej].getItem().getNombre());
-                panel3.add(accion);
-                System.out.println(mapa.getCasillas()[ei][ej].getItem());
-                mapa.getCasillas()[0][0].getHeroe().aniadirItem(mapa.getCasillas()[ei][ej].getItem());
-                mapa.getCasillas()[0][0].getHeroe().imprimirMochila();
-                //Poner JLabels a la mochila
-                for(int i = 0; i < 1; i++){
-                    for(int j = 0; j < 5; j++){
-                        item = new JLabel(mapa.getCasillas()[ei][ej].getItem().getNombre());
-                        moch[i][j].add(item);                                   
-                    }
+            try{
+                if (e.getSource() == square2[0][1]) {
+                    ei--;
+                    inc(ei, ej);
+                    square[ei][ej].remove(he);
+                    repaint();
+                    revalidate();
+                    square[ei][ej].add(he);
+                    //System.out.println("Presionaste arriba");
+                    
+                }else if (e.getSource() == square2[2][0]) {
+                    //System.out.println("Presionaste abajo");
+                    ei++;
+                    inc(ei, ej);
+                    square[ei][ej].remove(he);
+                    repaint();
+                    revalidate();
+                    square[ei][ej].add(he);
+                }else if (e.getSource() == square2[1][1]) {
+                    ej--;
+                    inc(ei, ej);
+                    square[ei][ej].remove(he);
+                    repaint();
+                    revalidate();
+                    square[ei][ej].add(he);
+                    //System.out.println("Presionaste izquierda");
+                }else if (e.getSource() == square2[2][1]) {
+                    ej++;
+                    inc(ei, ej);
+                    square[ei][ej].remove(he);
+                    repaint();
+                    revalidate();
+                    square[ei][ej].add(he);
+                    //System.out.println("Presionaste derecha");
                 }
-            }      
+                else if(e.getSource() == cselect[0][0]){
+                    //System.out.println("Has seleccionado a Erguro");
+                    seleccion = 0;
+                    initComponents(); 
+                }
+                else if(e.getSource() == cselect[1][0]){
+                    //System.out.println("Has seleccionado a Manana");
+                    seleccion = 1;
+                    initComponents(); 
+                }
+                else if(e.getSource() == cselect[2][0]){
+                    //System.out.println("Has seleccionado a Truth");
+                    seleccion = 2;
+                    initComponents(); 
+                }
+                //Poner los dos botones usar/soltar para cada espacio
+                //Esto es para añadir items 
+                else if(e.getSource() == siono){
+                    System.out.println("Recogiste Item");
+                    accion = new JLabel("Recogiste un " + mapa.getCasillas()[ei][ej].getItem().getNombre());
+                    panel3.add(accion);
+                    //System.out.println(mapa.getCasillas()[ei][ej].getItem());
+                    mapa.getCasillas()[0][0].getHeroe().aniadirItem(mapa.getCasillas()[ei][ej].getItem());
+                    System.out.println(mapa.getCasillas()[ei][ej].getItem().getNombre());
+                    mapa.getCasillas()[0][0].getHeroe().imprimirMochila();
+                    //Poner JLabels a la mochila
+                    for(int i = 0; i < 1; i++){
+                        counter = 0;
+                        for(int j = 0; j < 5; j++){
+                            if(mapa.getCasillas()[0][0].getHeroe().getMochila()[0] != null && counter == 0 && item == null || mapa.getCasillas()[0][0].getHeroe().getMochila()[j] == null  && counter == 0){
+                                item = new JLabel(mapa.getCasillas()[ei][ej].getItem().getNombre());
+                                if(j > 0){
+                                    moch[i][j-1].add(item); 
+                                }
+                                else{
+                                    moch[i][j].add(item); 
+                                }
+                                counter++;                                  
+                            }
+                        }
+                    }
+                    mapa.casillas[ei][ej].setItem(null);
+                }
+            }
+            catch(ArrayIndexOutOfBoundsException ex){
+                System.out.println("Saliendo del mapa");
+
+            }
+            catch(NullPointerException ex){
+                System.out.println("En esta casilla no hay nada");
+            }
         }
     }
 
     //generar un heroe dependiendo del que se elija al iniciar el juego panel 3
     //hacer los escenarios de batalla
-    //recolección de items
+    //recolección de items poner limite arrojar accion debes soltar un item para añadir otro
 }
 

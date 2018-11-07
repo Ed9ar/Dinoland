@@ -1,3 +1,4 @@
+import java.util.Random;
 public class Mapa{
 /*    public static Personaje[][] casillas;
 
@@ -17,6 +18,12 @@ public class Mapa{
         return casillas;
     }
 
+
+	public static int calcularProbabilidad(){
+		Random rand = new Random();
+		int  n = rand.nextInt(6) + 1;
+		return n;
+	}
     /*public void imprimeMapa(){
 		for(int i=0;i<casillas.length;i++){
 			if(mochila[i]!=null){
