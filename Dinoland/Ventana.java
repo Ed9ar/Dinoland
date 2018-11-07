@@ -420,6 +420,10 @@ public class Ventana extends JFrame{
         //añadir botón de reiniciar y salir
     }
 
+    public void batalla(){
+        
+    }
+
     //Con esto se mueve el tipin, solo se mueve la imagen, el objeto permanece en la misma casilla
     public class BotonListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -481,6 +485,8 @@ public class Ventana extends JFrame{
                     accion = new JLabel("Usaste Item ");
                     moch[0][0].remove(item);
                     panel3.add(accion);
+                    repaint();
+                    revalidate();
                 }
                 else if(e.getSource() == soltar1){
                     mapa.getCasillas()[0][0].getHeroe().soltarItem(0);
@@ -488,6 +494,8 @@ public class Ventana extends JFrame{
                     accion = new JLabel("Soltaste Item ");
                     moch[0][0].remove(item);
                     panel3.add(accion);
+                    repaint();
+                    revalidate();
                 }
                 else if(e.getSource() == usar2){
                     mapa.getCasillas()[0][0].getHeroe().usarItem(1);
@@ -495,6 +503,8 @@ public class Ventana extends JFrame{
                     accion = new JLabel("Usaste Item ");
                     moch[0][1].remove(item);
                     panel3.add(accion);
+                    repaint();
+                    revalidate();
                 }
                 else if(e.getSource() == soltar2){
                     mapa.getCasillas()[0][0].getHeroe().soltarItem(1);
@@ -502,6 +512,8 @@ public class Ventana extends JFrame{
                     accion = new JLabel("Soltaste Item ");
                     moch[0][1].remove(item);
                     panel3.add(accion);
+                    repaint();
+                    revalidate();
                     
                 }
                 else if(e.getSource() == usar3){
@@ -510,6 +522,8 @@ public class Ventana extends JFrame{
                     accion = new JLabel("Usaste Item ");
                     moch[0][2].remove(item);
                     panel3.add(accion);
+                    repaint();
+                    revalidate();
                 }
                 else if(e.getSource() == soltar3){
                     mapa.getCasillas()[0][0].getHeroe().soltarItem(2);
@@ -517,6 +531,8 @@ public class Ventana extends JFrame{
                     accion = new JLabel("Soltaste Item ");
                     moch[0][2].remove(item);
                     panel3.add(accion);
+                    repaint();
+                    revalidate();
                 }
                 else if(e.getSource() == usar4){
                     mapa.getCasillas()[0][0].getHeroe().usarItem(3);
@@ -524,6 +540,8 @@ public class Ventana extends JFrame{
                     accion = new JLabel("Usaste Item ");
                     moch[0][3].remove(item);
                     panel3.add(accion);
+                    repaint();
+                    revalidate();
                 }
                 else if(e.getSource() == soltar4){
                     mapa.getCasillas()[0][0].getHeroe().soltarItem(3);
@@ -531,6 +549,8 @@ public class Ventana extends JFrame{
                     accion = new JLabel("Soltaste Item ");
                     moch[0][3].remove(item);
                     panel3.add(accion);
+                    repaint();
+                    revalidate();
                 }
                 else if(e.getSource() == siono){
                     System.out.println("Recogiste Item");

@@ -2,6 +2,6 @@
 
 public class Pildora extends Item{
     public Pildora(){
-        super("Pildora",35);
+        super("Pildora",15);
     }
 }

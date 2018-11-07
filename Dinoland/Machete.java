@@ -2,6 +2,6 @@
 
 public class Machete extends Item{
     public Machete(){
-        super("Machete",25);
+        super("Machete",8);
     }
 }

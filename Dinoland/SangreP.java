@@ -2,6 +2,6 @@
 
 public class SangreP extends Item{
     public SangreP(){
-        super("SangreP", 15);
+        super("SangreP", 5);
     }
 }

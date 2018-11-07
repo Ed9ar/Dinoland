@@ -1,7 +1,8 @@
+import javax.swing.JLabel;
 
 public abstract class Heroe extends Personaje{
 	private Item[] mochila;
-	private int mana;
+	private int llave;
 	private int counter;
 	//movimiento
 
@@ -43,6 +44,14 @@ public abstract class Heroe extends Personaje{
 		mochila[index]=null;
 	}
 
+	public void setLlave(int llave){
+        this.llave = llave;
+    }
+
+    public int getLlave(){
+        return llave;
+    }
+
 	public void usarItem(int index){
 		if(mochila[index].getNombre() == "Machete"){
 			setAtaque(getAtaque()+mochila[index].getPuntos());
@@ -59,7 +68,13 @@ public abstract class Heroe extends Personaje{
 		else if(mochila[index].getNombre() == "Pildora"){
 			setSalud(getSalud()+mochila[index].getPuntos());
 		}
-		
+		else if(mochila[index].getNombre() == "Dardos"){
+			setAtaque(getAtaque()+mochila[index].getPuntos());
+		}
+		else if(mochila[index].getNombre() == "Llave"){
+			System.out.println("Ya puedes pelear con el TRex");
+			//accion = new JLabel("Has desbloqueado al Trex");
+		}
 		mochila[index]=null;
 		//mandar efecto en el juego if item de tipo salud puntos salud, if tipo ataque puntos ataque, igual para Mana puntos mana
 	}
