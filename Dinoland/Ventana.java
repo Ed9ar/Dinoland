@@ -13,7 +13,7 @@ import java.util.Random;
 public class Ventana extends JFrame{
     private JPanel panel1, panel2,panel3,panel4, character, victoriap, derrotap;
     private String respuesta;
-    private int i, counter;
+    private int i, counter, counter2;
     private int ei = 0, ej = 0, seleccion;
     private JDialog border1, border2, border3, border4, border5; 
     private JButton  siono;
@@ -26,7 +26,7 @@ public class Ventana extends JFrame{
     private JButton soltar;
     private JPanel info, mochila;
     private JScrollPane scrollPane;
-    private JLabel arriba, abajo, item, mochl, izq, derecha, raptor,raptor2, raptor3, steg, steg2, tyr, ig, ig2, mananac, ergurol, truthl, derrota, perdiste, victoria, he, ganaste, accion;
+    private JLabel hei, stats, arriba, abajo, item, mochl, izq, derecha, raptor,raptor2, raptor3, steg, steg2, tyr, ig, ig2, mananac, ergurol, truthl, derrota, perdiste, victoria, he, he2, ganaste, accion;
     //Generar Mapa y objetos en el mapa
     Mapa mapa = new Mapa(5,5);
     Dinosaurio trex = new TRex();
@@ -110,26 +110,36 @@ public class Ventana extends JFrame{
             }
             
         }
-
+        info = new JPanel();
+        info.setLayout(new FlowLayout());
         if(seleccion == 0){
             heImage = new ImageIcon("Erguro.jpeg");
             he = new JLabel(erguroImage);
+            he2 = new JLabel(erguroImage);
+            hei = new JLabel("Este científico desea ingresar al área de investigación"); 
             square[ei][ej].add(he);
+            info.add(he2);
             //heroe.imprimeStats();
         }
         else if(seleccion == 1){
             heImage = new ImageIcon("Mananac.jpeg");
             he = new JLabel(heImage);
+            hei = new JLabel("El cazador busca ingresar al área de seguridad del parque" ); 
+            he2 = new JLabel(heImage);
             square[ei][ej].add(he);
+            info.add(he2);
         }
         else if(seleccion == 2){
             heImage = new ImageIcon("Truth.gif");
             he = new JLabel(heImage);
+            hei = new JLabel("Científica busca ingresar al área de seguridad del parque"); 
+            he2 = new JLabel(heImage);
             square[ei][ej].add(he);
+            info.add(he2);
             
         }
+        info.add(hei);
         //square[0][0].add(erguro);
-
         velociraptorImage = new ImageIcon("raptor.png");
         raptor = new JLabel(velociraptorImage);
         raptor2 = new JLabel(velociraptorImage);
@@ -160,7 +170,6 @@ public class Ventana extends JFrame{
         panel2 = new JPanel();
         TitledBorder border2 = new TitledBorder("Personaje");
         panel2.setLayout(new GridLayout(2,1));
-        info = new JPanel();
         mochila = new JPanel();
         mochl = new JLabel("MOCHILA");
         mochila.add(mochl);
@@ -304,7 +313,16 @@ public class Ventana extends JFrame{
             //Remover cosas del mapa si se recogen o si vence a los dinosaurios
 
             //Otorgar victoria o derrota
-            
+            stats = new JLabel("Stats del heroe:"+ mapa.getCasillas()[0][0].getHeroe().getNombre() + " Salud: "
+            + mapa.getCasillas()[0][0].getHeroe().getSalud()
+            +" Ataque: "+ mapa.getCasillas()[0][0].getHeroe().getAtaque()
+            +" Defensa: "+ mapa.getCasillas()[0][0].getHeroe().getDefensa()+ "Mana : " + mapa.getCasillas()[0][0].getHeroe().getMana());
+        
+            if(counter2 == 0){
+                info.add(stats);
+                counter2++;
+            }
+
             if(mapa.getCasillas()[4][4].getDinosaurio().getSalud() == 0){
                 System.out.println("FELICIDADES GANASTE");
                 victoria();
@@ -315,7 +333,7 @@ public class Ventana extends JFrame{
                 derrota();
                 mapa.getCasillas()[0][0].getHeroe().imprimeStats();
             }
-        
+
         if(mapa.getCasillas()[x][y].getDinosaurio() != null){
             accion = new JLabel("\n");
             panel3.add(accion);
