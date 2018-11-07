@@ -1,3 +1,4 @@
+import java.util.Random;
 public abstract class Dinosaurio extends Personaje{
 
 	//private int nivelDeEnojo;
@@ -15,7 +16,7 @@ public abstract class Dinosaurio extends Personaje{
 			+" Defensa: "+ getDefensa());
 	}
 	
-
+	
 	/*public void setNivelDeEnojo(int nivelDeEnojo){
 		this.nivelDeEnojo=nivelDeEnojo;
 	}

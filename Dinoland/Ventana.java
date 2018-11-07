@@ -22,8 +22,8 @@ public class Ventana extends JFrame{
     private JButton[][] cselect = new JButton[3][1];
     private JPanel[][] square = new JPanel[5][5];
     private JPanel[][] moch = new JPanel[1][5];
-    private JButton usar;
-    private JButton soltar;
+    private JButton usar1,usar2,usar3,usar4;
+    private JButton soltar1,soltar2,soltar3,soltar4;
     private JPanel info, mochila;
     private JScrollPane scrollPane;
     private JLabel hei, stats, arriba, abajo, item, mochl, izq, derecha, raptor,raptor2, raptor3, steg, steg2, tyr, ig, ig2, mananac, ergurol, truthl, derrota, perdiste, victoria, he, he2, ganaste, accion;
@@ -178,18 +178,35 @@ public class Ventana extends JFrame{
                 moch[i][j] = new JPanel();
                 //item = new JLabel(mapa.getCasillas()[0][0].getHeroe().getMochila()[j].getItem().getNombre());
                 //moch[i][j].add(item);
-                usar = new JButton("Usar");
-                usar.addActionListener(new BotonListener());
-                soltar = new JButton("Soltar");
-                soltar.addActionListener(new BotonListener());
-                moch[i][j].add(usar);
-                moch[i][j].add(soltar);
                 moch[i][j].setLayout(new GridLayout(2,1));
                 moch[i][j].setBackground(Color.ORANGE);
                 moch[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
                 mochila.add(moch[i][j]);
             }
-            
+            usar1 = new JButton("Usar");
+            usar1.addActionListener(new BotonListener());
+            soltar1 = new JButton("Soltar");
+            soltar1.addActionListener(new BotonListener());
+            moch[0][0].add(usar1);
+            moch[0][0].add(soltar1);
+            usar2 = new JButton("Usar");
+            usar2.addActionListener(new BotonListener());
+            soltar2 = new JButton("Soltar");
+            soltar2.addActionListener(new BotonListener());
+            moch[0][1].add(usar2);
+            moch[0][1].add(soltar2);
+            usar3 = new JButton("Usar");
+            usar3.addActionListener(new BotonListener());
+            soltar3 = new JButton("Soltar");
+            soltar3.addActionListener(new BotonListener());
+            moch[0][2].add(usar3);
+            moch[0][2].add(soltar3);
+            usar4 = new JButton("Usar");
+            usar4.addActionListener(new BotonListener());
+            soltar4 = new JButton("Soltar");
+            soltar4.addActionListener(new BotonListener());
+            moch[0][3].add(usar4);
+            moch[0][3].add(soltar4);
         }
         mochila.setBorder(BorderFactory.createLineBorder(Color.black));
         info.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -458,6 +475,63 @@ public class Ventana extends JFrame{
                 }
                 //Poner los dos botones usar/soltar para cada espacio
                 //Esto es para añadir items 
+                else if(e.getSource() == usar1){
+                    mapa.getCasillas()[0][0].getHeroe().usarItem(0);
+                    System.out.println("Usar1");
+                    accion = new JLabel("Usaste Item ");
+                    moch[0][0].remove(item);
+                    panel3.add(accion);
+                }
+                else if(e.getSource() == soltar1){
+                    mapa.getCasillas()[0][0].getHeroe().soltarItem(0);
+                    System.out.println("Soltar1");
+                    accion = new JLabel("Soltaste Item ");
+                    moch[0][0].remove(item);
+                    panel3.add(accion);
+                }
+                else if(e.getSource() == usar2){
+                    mapa.getCasillas()[0][0].getHeroe().usarItem(1);
+                    System.out.println("Usar2");
+                    accion = new JLabel("Usaste Item ");
+                    moch[0][1].remove(item);
+                    panel3.add(accion);
+                }
+                else if(e.getSource() == soltar2){
+                    mapa.getCasillas()[0][0].getHeroe().soltarItem(1);
+                    System.out.println("Soltar2");
+                    accion = new JLabel("Soltaste Item ");
+                    moch[0][1].remove(item);
+                    panel3.add(accion);
+                    
+                }
+                else if(e.getSource() == usar3){
+                    mapa.getCasillas()[0][0].getHeroe().usarItem(2);
+                    System.out.println("Usar3");
+                    accion = new JLabel("Usaste Item ");
+                    moch[0][2].remove(item);
+                    panel3.add(accion);
+                }
+                else if(e.getSource() == soltar3){
+                    mapa.getCasillas()[0][0].getHeroe().soltarItem(2);
+                    System.out.println("Soltar3");
+                    accion = new JLabel("Soltaste Item ");
+                    moch[0][2].remove(item);
+                    panel3.add(accion);
+                }
+                else if(e.getSource() == usar4){
+                    mapa.getCasillas()[0][0].getHeroe().usarItem(3);
+                    System.out.println("Usar4");
+                    accion = new JLabel("Usaste Item ");
+                    moch[0][3].remove(item);
+                    panel3.add(accion);
+                }
+                else if(e.getSource() == soltar4){
+                    mapa.getCasillas()[0][0].getHeroe().soltarItem(3);
+                    System.out.println("Soltar4");
+                    accion = new JLabel("Soltaste Item ");
+                    moch[0][3].remove(item);
+                    panel3.add(accion);
+                }
                 else if(e.getSource() == siono){
                     System.out.println("Recogiste Item");
                     accion = new JLabel("Recogiste un " + mapa.getCasillas()[ei][ej].getItem().getNombre());
@@ -483,6 +557,7 @@ public class Ventana extends JFrame{
                         }
                     }
                     mapa.casillas[ei][ej].setItem(null);
+                    
                 }
             }
             catch(ArrayIndexOutOfBoundsException ex){

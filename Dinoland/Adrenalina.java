@@ -2,6 +2,6 @@
 
 public class Adrenalina extends Item{
     public Adrenalina(){
-        super("Adrenalina",1, 15);
+        super("Adrenalina", 15);
     }
 }

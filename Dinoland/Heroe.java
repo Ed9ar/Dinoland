@@ -43,7 +43,23 @@ public abstract class Heroe extends Personaje{
 		mochila[index]=null;
 	}
 
-	public void usarItem(Item item, int index){
+	public void usarItem(int index){
+		if(mochila[index].getNombre() == "Machete"){
+			setAtaque(getAtaque()+mochila[index].getPuntos());
+		}
+		else if(mochila[index].getNombre() == "Agua"){
+			setSalud(getSalud()+mochila[index].getPuntos());
+		}
+		else if(mochila[index].getNombre() == "Adrenalina"){
+			setDefensa(getDefensa()+mochila[index].getPuntos());
+		}
+		else if(mochila[index].getNombre() == "SangreP"){
+			setVelocidad(getVelocidad()+mochila[index].getPuntos());
+		}
+		else if(mochila[index].getNombre() == "Pildora"){
+			setSalud(getSalud()+mochila[index].getPuntos());
+		}
+		
 		mochila[index]=null;
 		//mandar efecto en el juego if item de tipo salud puntos salud, if tipo ataque puntos ataque, igual para Mana puntos mana
 	}

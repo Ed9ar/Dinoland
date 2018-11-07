@@ -2,6 +2,6 @@
 
 public class Dardos extends Item{
     public Dardos(){
-        super("Dardos",2, 10);
+        super("Dardos",10);
     }
 }
