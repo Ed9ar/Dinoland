@@ -485,6 +485,14 @@ public class Ventana extends JFrame{
                     accion = new JLabel("Usaste Item ");
                     moch[0][0].remove(item);
                     panel3.add(accion);
+                    info.removeAll();
+                    info.add(he2);
+                    info.add(hei);
+                    stats = new JLabel("Stats del heroe:"+ mapa.getCasillas()[0][0].getHeroe().getNombre() + " Salud: "
+                    + mapa.getCasillas()[0][0].getHeroe().getSalud()
+                    +" Ataque: "+ mapa.getCasillas()[0][0].getHeroe().getAtaque()
+                    +" Defensa: "+ mapa.getCasillas()[0][0].getHeroe().getDefensa()+ "Mana : " + mapa.getCasillas()[0][0].getHeroe().getMana());
+                    info.add(stats);
                     repaint();
                     revalidate();
                 }
@@ -502,7 +510,14 @@ public class Ventana extends JFrame{
                     System.out.println("Usar2");
                     accion = new JLabel("Usaste Item ");
                     moch[0][1].remove(item);
-                    panel3.add(accion);
+                    info.removeAll();
+                    info.add(he2);
+                    info.add(hei);
+                    stats = new JLabel("Stats del heroe:"+ mapa.getCasillas()[0][0].getHeroe().getNombre() + " Salud: "
+                    + mapa.getCasillas()[0][0].getHeroe().getSalud()
+                    +" Ataque: "+ mapa.getCasillas()[0][0].getHeroe().getAtaque()
+                    +" Defensa: "+ mapa.getCasillas()[0][0].getHeroe().getDefensa()+ "Mana : " + mapa.getCasillas()[0][0].getHeroe().getMana());
+                    info.add(stats);
                     repaint();
                     revalidate();
                 }
@@ -521,7 +536,14 @@ public class Ventana extends JFrame{
                     System.out.println("Usar3");
                     accion = new JLabel("Usaste Item ");
                     moch[0][2].remove(item);
-                    panel3.add(accion);
+                    info.removeAll();
+                    info.add(he2);
+                    info.add(hei);
+                    stats = new JLabel("Stats del heroe:"+ mapa.getCasillas()[0][0].getHeroe().getNombre() + " Salud: "
+                    + mapa.getCasillas()[0][0].getHeroe().getSalud()
+                    +" Ataque: "+ mapa.getCasillas()[0][0].getHeroe().getAtaque()
+                    +" Defensa: "+ mapa.getCasillas()[0][0].getHeroe().getDefensa()+ "Mana : " + mapa.getCasillas()[0][0].getHeroe().getMana());
+                    info.add(stats);
                     repaint();
                     revalidate();
                 }
@@ -539,7 +561,14 @@ public class Ventana extends JFrame{
                     System.out.println("Usar4");
                     accion = new JLabel("Usaste Item ");
                     moch[0][3].remove(item);
-                    panel3.add(accion);
+                    info.removeAll();
+                    info.add(he2);
+                    info.add(hei);
+                    stats = new JLabel("Stats del heroe:"+ mapa.getCasillas()[0][0].getHeroe().getNombre() + " Salud: "
+                    + mapa.getCasillas()[0][0].getHeroe().getSalud()
+                    +" Ataque: "+ mapa.getCasillas()[0][0].getHeroe().getAtaque()
+                    +" Defensa: "+ mapa.getCasillas()[0][0].getHeroe().getDefensa()+ "Mana : " + mapa.getCasillas()[0][0].getHeroe().getMana());
+                    info.add(stats);
                     repaint();
                     revalidate();
                 }
