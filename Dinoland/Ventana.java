@@ -15,6 +15,9 @@ public class Ventana extends JFrame{
     private String respuesta;
     private int i, counter, counter2;
     private int ei = 0, ej = 0, seleccion;
+    private JMenu jMenu;
+    private JMenuBar jMenuBar;
+    private JMenuItem guardar, cargar;
     private JDialog border1, border2, border3, border4, border5; 
     private JButton  siono;
     private ImageIcon abajoImage, arribaImage, izquierdaImage, derechaImage, iguanodonImage, trexImage, velociraptorImage, stegosaurusImage, erguroImage, truthImage, mananaImage, victoriaImage, derrotaImage, heImage;
@@ -77,6 +80,13 @@ public class Ventana extends JFrame{
         truthImage = new ImageIcon("Truth.gif");
         truthl = new JLabel(truthImage);
         cselect[2][0].add(truthl);
+        jMenuBar= new JMenuBar();
+		jMenu= new JMenu("Archivo");
+		jMenuBar.add(jMenu);
+		cargar = new JMenuItem("Cargar Partida");
+		cargar.addActionListener(new CargarListener());
+		jMenu.add(cargar);
+		setJMenuBar(jMenuBar);
         add(character, BorderLayout.CENTER);
 
         setVisible(true);
@@ -90,8 +100,14 @@ public class Ventana extends JFrame{
         remove(character);
         setSize(900,900);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-	    panel1 = new JPanel();
+        panel1 = new JPanel();
+        jMenuBar= new JMenuBar();
+		jMenu= new JMenu("Archivo");
+		jMenuBar.add(jMenu);
+		guardar = new JMenuItem("Guardar Partida");
+		guardar.addActionListener(new SaveListener());
+		jMenu.add(guardar);
+		setJMenuBar(jMenuBar);
         //panel1.setLayout(new FlowLayout());
 
         //Mapa en el segundo panel (Hacer un grid de 5x5 y poner el monito en donde se vaya moviendo con el listener)
@@ -355,6 +371,8 @@ public class Ventana extends JFrame{
             accion = new JLabel("\n");
             panel3.add(accion);
             //System.out.println("Aqui hay un " + mapa.casillas[x][y].getDinosaurio().getNombre());
+            //De este metodo se abre la ventana de batalla
+            //Poner la condicion si es el TREX y llave != 1 no abrir el panerl de batalla, si es 1 si lño debe de hacer
             accion = new JLabel("Te has topado con un " + mapa.casillas[x][y].getDinosaurio().getNombre() + "es momento de pelear");
             panel3.add(accion);
             repaint();
@@ -618,6 +636,36 @@ public class Ventana extends JFrame{
             }
         }
     }
+
+    public class SaveListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			try{
+				FileOutputStream fos= new FileOutputStream("partida.atm");
+				ObjectOutputStream oos= new ObjectOutputStream(fos);
+				oos.writeObject(mapa);
+				oos.close();
+			}catch(IOException ex){
+				System.out.println("Ocurrio un IOException");	
+			}
+
+		}
+    }
+    
+    public class CargarListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			try{
+				File file = new File("partida.atm");
+				FileInputStream fis= new FileInputStream(file);
+				ObjectInputStream ois= new ObjectInputStream(fis);
+				mapa = (Mapa)ois.readObject();
+                mapa.getCasillas()[0][0].getHeroe().imprimirMochila();
+			}catch(IOException ex){
+				System.out.println("Ocurrio un IOException");
+			}catch(ClassNotFoundException ex){
+				System.out.println("Ocurrio un class not found Exception");
+			}
+		}
+	}
 
     //generar un heroe dependiendo del que se elija al iniciar el juego panel 3
     //hacer los escenarios de batalla
