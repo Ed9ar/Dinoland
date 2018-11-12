@@ -1,3 +1,4 @@
+//package ;
 
 public abstract class Personaje implements Atacar{
 	private int ataque;
@@ -17,6 +18,12 @@ public abstract class Personaje implements Atacar{
 		this.mana = mana;
 	}
 
+	public String imprimesStats(){
+		return("Stats del Personaje:"+getNombre()+" Salud: "
+			+getSalud()
+			+" Ataque: "+getAtaque()
+			+" Defensa: "+ getDefensa());
+	}
 
 	public void setMana(int mana){
 		this.mana = mana;
@@ -67,7 +74,7 @@ public abstract class Personaje implements Atacar{
 		personaje.setSalud(personaje.getSalud()-(getAtaque()-(personaje.getDefensa()/4)));
 	}
 	
-	/*public void atacar(Personaje dinosaurio, Item item){ //Solo dinosaurio	
-		dinosaurio.setSalud(dinosaurio.getSalud()-(getAtaque()-dinosaurio.getDefensa()-1));//+Item.getPuntos()
-	}*/
+	public void atacar(Personaje dinosaurio, int mana){ //Solo dinosaurio	
+		dinosaurio.setSalud(dinosaurio.getSalud()-(getAtaque()+mana/2 -dinosaurio.getDefensa()-1));//+Item.getPuntos()
+	}
 }

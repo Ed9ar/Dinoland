@@ -17,6 +17,13 @@ public abstract class Heroe extends Personaje{
 			+" Ataque: "+getAtaque()
 			+" Defensa: "+ getDefensa()+ "Mana : " + getMana());
 	}
+
+	public String imprimesStats(){
+		return("Stats del heroe:"+getNombre()+" Salud: "
+			+getSalud()
+			+" Ataque: "+getAtaque()
+			+" Defensa: "+ getDefensa()+ "Mana : " + getMana());
+	}
 	
 	/*
 	public void atacar(Dinosaurio dinosaurio){
@@ -69,10 +76,11 @@ public abstract class Heroe extends Personaje{
 			setSalud(getSalud()+mochila[index].getPuntos());
 		}
 		else if(mochila[index].getNombre() == "Dardos"){
-			setAtaque(getAtaque()+mochila[index].getPuntos());
+			setMana(getMana()+mochila[index].getPuntos());
 		}
 		else if(mochila[index].getNombre() == "Llave"){
 			System.out.println("Ya puedes pelear con el TRex");
+			setLlave(1);
 			//accion = new JLabel("Has desbloqueado al Trex");
 		}
 		mochila[index]=null;

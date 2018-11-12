@@ -29,7 +29,7 @@ public class Ventana extends JFrame{
     private JButton soltar1,soltar2,soltar3,soltar4;
     private JPanel info, mochila;
     private JScrollPane scrollPane;
-    private JLabel hei, stats, arriba, abajo, item, mochl, izq, derecha, raptor,raptor2, raptor3, steg, steg2, tyr, ig, ig2, mananac, ergurol, truthl, derrota, perdiste, victoria, he, he2, ganaste, accion;
+    private JLabel hei, stats, statsD, arriba, abajo, item, mochl, izq, derecha, raptor,raptor2, raptor3, steg, steg2, tyr, ig, ig2, mananac, ergurol, truthl, derrota, perdiste, victoria, he, he2, ganaste, accion;
     //Generar Mapa y objetos en el mapa
     Mapa mapa = new Mapa(5,5);
     Dinosaurio trex = new TRex();
@@ -56,7 +56,7 @@ public class Ventana extends JFrame{
     }
 
     public void ventanaSeleccion(){
-        setSize(250,250);
+        setSize(300,300);
         character = new JPanel();
         character.setLayout(new FlowLayout());
         for(int i = 0; i < 3; i++){
@@ -346,10 +346,7 @@ public class Ventana extends JFrame{
             //Remover cosas del mapa si se recogen o si vence a los dinosaurios
 
             //Otorgar victoria o derrota
-            stats = new JLabel("Stats del heroe:"+ mapa.getCasillas()[0][0].getHeroe().getNombre() + " Salud: "
-            + mapa.getCasillas()[0][0].getHeroe().getSalud()
-            +" Ataque: "+ mapa.getCasillas()[0][0].getHeroe().getAtaque()
-            +" Defensa: "+ mapa.getCasillas()[0][0].getHeroe().getDefensa()+ "Mana : " + mapa.getCasillas()[0][0].getHeroe().getMana());
+            stats = new JLabel(mapa.getCasillas()[0][0].getHeroe().imprimesStats());
         
             if(counter2 == 0){
                 info.add(stats);
@@ -369,11 +366,23 @@ public class Ventana extends JFrame{
 
         if(mapa.getCasillas()[x][y].getDinosaurio() != null){
             accion = new JLabel("\n");
+            statsD = new JLabel(mapa.getCasillas()[x][y].getDinosaurio().imprimesStats());
             panel3.add(accion);
+            System.out.println(mapa.getCasillas()[0][0].getHeroe().getLlave());
+            if(mapa.casillas[x][y].getDinosaurio().getNombre() == "TRex" && mapa.getCasillas()[0][0].getHeroe().getLlave() == 1){
+                batalla();
+            }
+            else if(mapa.casillas[x][y].getDinosaurio().getNombre() == "TRex" && mapa.getCasillas()[0][0].getHeroe().getLlave() == 0){
+                accion = new JLabel("Necesitas usar la llave para desbloquear al TRex");
+            }
+            else{
+                //batalla();
+                accion = new JLabel("Te has topado con un " + mapa.casillas[x][y].getDinosaurio().getNombre() + "es momento de pelear");
+            }
+            
             //System.out.println("Aqui hay un " + mapa.casillas[x][y].getDinosaurio().getNombre());
             //De este metodo se abre la ventana de batalla
-            //Poner la condicion si es el TREX y llave != 1 no abrir el panerl de batalla, si es 1 si lño debe de hacer
-            accion = new JLabel("Te has topado con un " + mapa.casillas[x][y].getDinosaurio().getNombre() + "es momento de pelear");
+            
             panel3.add(accion);
             repaint();
             revalidate();
@@ -439,7 +448,14 @@ public class Ventana extends JFrame{
     }
 
     public void batalla(){
-        
+        panel4.removeAll();
+        stats = new JLabel(mapa.getCasillas()[0][0].getHeroe().imprimesStats());
+        statsD = new JLabel(mapa.getCasillas()[ei][ej].getDinosaurio().imprimesStats());
+        panel4.add(stats);
+        panel4.add(statsD);
+        //while(mapa.getCasillas()[0][0].getHeroe().getSalud() > 0 && mapa.getCasillas()[ei][ej].getDinosaurio().getSalud() > 0){
+
+        //}
     }
 
     //Con esto se mueve el tipin, solo se mueve la imagen, el objeto permanece en la misma casilla

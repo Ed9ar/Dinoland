@@ -2,7 +2,7 @@ import java.util.Random;
 public abstract class Dinosaurio extends Personaje{
 
 	//private int nivelDeEnojo;
-	private int tranquilizante;
+	//private int tranquilizante;
 	private String informacion;
 
 	public Dinosaurio(int ataque,int defensa,int salud, int velocidad, int mana, String nombre){
@@ -11,6 +11,13 @@ public abstract class Dinosaurio extends Personaje{
 
 	public void imprimeStats(){
 		System.out.println("Stats del Dinosaurio:"+getNombre()+" Salud: "
+			+getSalud()
+			+" Ataque: "+getAtaque()
+			+" Defensa: "+ getDefensa());
+	}
+
+	public String imprimesStats(){
+		return("Stats del dinosaurio:"+getNombre()+" Salud: "
 			+getSalud()
 			+" Ataque: "+getAtaque()
 			+" Defensa: "+ getDefensa());
