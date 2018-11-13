@@ -22,6 +22,10 @@ public abstract class Dinosaurio extends Personaje{
 			+" Ataque: "+getAtaque()
 			+" Defensa: "+ getDefensa());
 	}
+
+	public void Habilidad(Heroe h){
+        h.setSalud(h.getSalud()-(getAtaque()*Mapa.calcularProbabilidad(3, 1)));
+    }
 	
 	
 	/*public void setNivelDeEnojo(int nivelDeEnojo){

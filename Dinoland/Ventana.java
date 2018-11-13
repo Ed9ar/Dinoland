@@ -475,20 +475,24 @@ public class Ventana extends JFrame{
 
     public void batalla(){
         panel4.removeAll();
-        combo = new JComboBox();
-        combo.addItem(" ");
-        combo.addItem("V");
-        combo.addItem("F");
-        combo.addActionListener(new ComboBoxDemo());
         stats = new JLabel(mapa.getCasillas()[0][0].getHeroe().imprimesStats());
         statsD = new JLabel(mapa.getCasillas()[ei][ej].getDinosaurio().imprimesStats());
         panel4.add(stats);
         panel4.add(statsD);
-        if(mapa.getCasillas()[0][0].getHeroe().getSalud() > 0 && mapa.getCasillas()[ei][ej].getDinosaurio().getSalud() > 0 && counter3 == 0){
+        if(mapa.getCasillas()[0][0].getHeroe().getSalud() > 0 && mapa.getCasillas()[ei][ej].getDinosaurio().getSalud() > 0){
+            combo = new JComboBox();
+            combo.addItem(" ");
+            combo.addItem("V");
+            combo.addItem("F");
+            combo.addActionListener(new ComboBoxDemo());
             index = Mapa.calcularProbabilidad(21, 0);
             pregunta = new JLabel(preguntas[index]);
             panel3.add(pregunta);
             panel3.add(combo);
+            System.out.println(mapa.getCasillas()[ei][ej].getDinosaurio().getSalud());
+            mapa.getCasillas()[0][0].getHeroe().getSalud();
+            mapa.getCasillas()[ei][ej].getDinosaurio().getSalud();
+            
         }
     
     }
@@ -496,24 +500,67 @@ public class Ventana extends JFrame{
     //Con esto se mueve el tipin, solo se mueve la imagen, el objeto permanece en la misma casilla
     public class ComboBoxDemo implements ActionListener{
         public void actionPerformed(ActionEvent l) {
+            //Habilidades del heroe también con probabilidades una vez elegido ataque cargado, si no ataqu
+            while(mapa.getCasillas()[0][0].getHeroe().getSalud() > 0 && mapa.getCasillas()[ei][ej].getDinosaurio().getSalud() > 0){
+                combo = new JComboBox();
+                combo.addItem(" ");
+                combo.addItem("V");
+                combo.addItem("F");
+                combo.addActionListener(new ComboBoxDemo());
+                index = Mapa.calcularProbabilidad(21, 0);
+                pregunta = new JLabel(preguntas[index]);
+                panel3.add(pregunta);
+                panel3.add(combo);
+                System.out.println(mapa.getCasillas()[ei][ej].getDinosaurio().getSalud());
+                mapa.getCasillas()[0][0].getHeroe().getSalud();
+                mapa.getCasillas()[ei][ej].getDinosaurio().getSalud();
+            
             if(index % 2 == 0 && combo.getSelectedItem() == "V"){
                 System.out.println("Ataca el Heroe");
                 accion = new JLabel("Respuesta correcta, ataca el heroe");
+                mapa.getCasillas()[0][0].getHeroe().atacar(mapa.getCasillas()[ei][ej].getDinosaurio());
+                System.out.println(mapa.getCasillas()[ei][ej].getDinosaurio().getSalud());
                 //Poner botones ataque normal y ataque cargado
-                //Usar Habilidades 
+                //Usar Habilidades
             }
             else if(index % 2 != 0 && combo.getSelectedItem() == "F"){
                 System.out.println("Ataca el Heroe");
                 accion = new JLabel("Respuesta correcta, ataca el heroe");
+                mapa.getCasillas()[0][0].getHeroe().atacar(mapa.getCasillas()[ei][ej].getDinosaurio());
+                System.out.println(mapa.getCasillas()[ei][ej].getDinosaurio().getSalud());
                 //Poner botones ataque normal y ataque cargado
                 //Usar Habilidades
             }
             else{
                 System.out.println("Ataca el Dino");
-                accion = new JLabel("Respuesta incorrecta, ataca el heroe");
+                accion = new JLabel("Respuesta incorrecta, ataca el Dino");
+                if(Mapa.calcularProbabilidad(10,0) == 2){
+                    mapa.getCasillas()[ei][ej].getDinosaurio().Habilidad(mapa.getCasillas()[0][0].getHeroe());
+                } 
+                else{
+                    mapa.getCasillas()[ei][ej].getDinosaurio().atacar(mapa.getCasillas()[0][0].getHeroe());
+                }
+                System.out.println(mapa.getCasillas()[0][0].getHeroe().getSalud());
                 //Ataca Dino
             }
+        }
             panel3.add(accion);
+            panel4.removeAll();
+            stats = new JLabel(mapa.getCasillas()[0][0].getHeroe().imprimesStats());
+            statsD = new JLabel(mapa.getCasillas()[ei][ej].getDinosaurio().imprimesStats());
+            panel4.add(stats);
+            panel4.add(statsD);
+            if(mapa.getCasillas()[4][4].getDinosaurio().getSalud() == 0){
+                System.out.println("FELICIDADES GANASTE");
+                victoria();
+                trex.imprimeStats();
+            }
+            else if(mapa.getCasillas()[0][0].getHeroe().getSalud() == 0){
+                System.out.println("Perdiste");
+                derrota();
+                mapa.getCasillas()[0][0].getHeroe().imprimeStats();
+            }
+
     }
     }
     public class BotonListener implements ActionListener{

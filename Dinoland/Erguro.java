@@ -9,9 +9,9 @@ public class Erguro extends Heroe{
     public void Habilidad(){
         int mana = getMana();
         if(mana >= 15){
-            //Multiplicar Stats
-            System.out.println("Multiplicando Stats");
-            //erguro.setMana(mana-15);
+            setSalud(getSalud()+5);
+            setAtaque(getAtaque()+5);
+            setDefensa(getDefensa()+5);
         }
         else{
             System.out.println("No hay suficiente mana");
