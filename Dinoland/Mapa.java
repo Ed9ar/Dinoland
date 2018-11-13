@@ -19,9 +19,9 @@ public class Mapa{
     }
 
 
-	public static int calcularProbabilidad(){
+	public static int calcularProbabilidad(int x, int y){
 		Random rand = new Random();
-		int  n = rand.nextInt(6) + 1;
+		int  n = rand.nextInt(x) + y;
 		return n;
 	}
     /*public void imprimeMapa(){

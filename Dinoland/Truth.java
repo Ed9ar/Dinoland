@@ -5,7 +5,7 @@ public class Truth extends Heroe{
         super(18,18,100, 18,30, "Truth");
     }
 
-    public void multiplicarItemStats(){
+    public void Habilidad(){
         int mana = getMana();
         //Cambiar a Truth dependiendo del heroe que se genera
         if(mana >= 10){

@@ -6,7 +6,7 @@ public class Erguro extends Heroe{
         super(20,30,100, 10,40, "Erguro");
     }
 
-    public void multiplicarStats(){
+    public void Habilidad(){
         int mana = getMana();
         if(mana >= 15){
             //Multiplicar Stats

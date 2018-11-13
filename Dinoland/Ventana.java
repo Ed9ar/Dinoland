@@ -11,7 +11,31 @@ import java.util.Random;
 
 
 public class Ventana extends JFrame{
+    private JComboBox combo;
     private JPanel panel1, panel2,panel3,panel4, character, victoriap, derrotap;
+    private String[] preguntas = {"El TRex podia vivir hasta 30 años", //V
+        "La sangre del T-Rex era fría como la de todos los reptiles", //F
+        "El nombre Tyrannosaurus signficia Lagarto Tirano", //V
+    	"El T-Rex podía alcanzar su boca con sus brazos", //F
+    	"El T-Rex habitaba en América del Norte, en ríos y bosques",//V
+        "Las crías del T-Rex no tenían plumas",//F
+        "El T-Rex podía comer 500 libras en una sola mordida",//V
+        "El Iguanadon fue descubierto en el 2002 por el geólogo ingles Gideon Mantell",//F
+        "El Iguanadon vivió en el periodo cartáceo",//V
+        "El Iguanadon era carnívoro", //F
+        "El Iguanadon fue el segundo dinosaurio en recibir un nombre formal, después del Megalosauro",//V
+        "El Iguanodon olo podía moverse en 4 extremidades",//F
+        "Iguanadon signficia Diente de Iguana",//V
+    	"El Iguanadon pesaba alrededor de 5 toneladas y medía cerca de 20 metros de largo",//F
+    	"El Iguanadon tenía un cráneo delgado y una cola larga",//V
+    	"El Iguanadon podía alcanazar la velocidad de 100 kms/h",//F
+        "El Iguanadon, junto con el T-Rex y el Stegosaurus, inspiraron la apariencia de Godzilla",//V
+        "El Stegosaurus podía alcanzar la velocidad de 50 kms/h", //F
+    	"El nombre Stegosaurus significa lagarto de techo", //V
+        "El Stegosaurus vivió en Asia", //F
+        "El cerebro de un Stegosaurus era similar al de un perro", //V
+        "El Stegosaurus no vivió en el último periodo Jurasico" };//F
+         
     private String respuesta;
     private int i, counter, counter2;
     private int ei = 0, ej = 0, seleccion;
@@ -25,11 +49,12 @@ public class Ventana extends JFrame{
     private JButton[][] cselect = new JButton[3][1];
     private JPanel[][] square = new JPanel[5][5];
     private JPanel[][] moch = new JPanel[1][5];
+    public int index, counter3;
     private JButton usar1,usar2,usar3,usar4;
     private JButton soltar1,soltar2,soltar3,soltar4;
     private JPanel info, mochila;
     private JScrollPane scrollPane;
-    private JLabel hei, stats, statsD, arriba, abajo, item, mochl, izq, derecha, raptor,raptor2, raptor3, steg, steg2, tyr, ig, ig2, mananac, ergurol, truthl, derrota, perdiste, victoria, he, he2, ganaste, accion;
+    private JLabel hei, stats,pregunta, statsD, arriba, abajo, item, mochl, izq, derecha, raptor,raptor2, raptor3, steg, steg2, tyr, ig, ig2, mananac, ergurol, truthl, derrota, perdiste, victoria, he, he2, ganaste, accion;
     //Generar Mapa y objetos en el mapa
     Mapa mapa = new Mapa(5,5);
     Dinosaurio trex = new TRex();
@@ -317,7 +342,7 @@ public class Ventana extends JFrame{
                         /*
                         Random rand = new Random();
                         int  n = rand.nextInt(6) + 1;*/
-                        int n = Mapa.calcularProbabilidad();
+                        int n = Mapa.calcularProbabilidad(6, 1);
                         if(n == 1){
                             mapa.casillas[i][j].setItem(agua);
                         }
@@ -374,16 +399,17 @@ public class Ventana extends JFrame{
             }
             else if(mapa.casillas[x][y].getDinosaurio().getNombre() == "TRex" && mapa.getCasillas()[0][0].getHeroe().getLlave() == 0){
                 accion = new JLabel("Necesitas usar la llave para desbloquear al TRex");
+                panel3.add(accion);
             }
             else{
-                //batalla();
                 accion = new JLabel("Te has topado con un " + mapa.casillas[x][y].getDinosaurio().getNombre() + "es momento de pelear");
+                panel3.add(accion);
+                batalla();
             }
             
             //System.out.println("Aqui hay un " + mapa.casillas[x][y].getDinosaurio().getNombre());
             //De este metodo se abre la ventana de batalla
             
-            panel3.add(accion);
             repaint();
             revalidate();
         }
@@ -449,16 +475,47 @@ public class Ventana extends JFrame{
 
     public void batalla(){
         panel4.removeAll();
+        combo = new JComboBox();
+        combo.addItem(" ");
+        combo.addItem("V");
+        combo.addItem("F");
+        combo.addActionListener(new ComboBoxDemo());
         stats = new JLabel(mapa.getCasillas()[0][0].getHeroe().imprimesStats());
         statsD = new JLabel(mapa.getCasillas()[ei][ej].getDinosaurio().imprimesStats());
         panel4.add(stats);
         panel4.add(statsD);
-        //while(mapa.getCasillas()[0][0].getHeroe().getSalud() > 0 && mapa.getCasillas()[ei][ej].getDinosaurio().getSalud() > 0){
-
-        //}
+        if(mapa.getCasillas()[0][0].getHeroe().getSalud() > 0 && mapa.getCasillas()[ei][ej].getDinosaurio().getSalud() > 0 && counter3 == 0){
+            index = Mapa.calcularProbabilidad(21, 0);
+            pregunta = new JLabel(preguntas[index]);
+            panel3.add(pregunta);
+            panel3.add(combo);
+        }
+    
     }
 
     //Con esto se mueve el tipin, solo se mueve la imagen, el objeto permanece en la misma casilla
+    public class ComboBoxDemo implements ActionListener{
+        public void actionPerformed(ActionEvent l) {
+            if(index % 2 == 0 && combo.getSelectedItem() == "V"){
+                System.out.println("Ataca el Heroe");
+                accion = new JLabel("Respuesta correcta, ataca el heroe");
+                //Poner botones ataque normal y ataque cargado
+                //Usar Habilidades 
+            }
+            else if(index % 2 != 0 && combo.getSelectedItem() == "F"){
+                System.out.println("Ataca el Heroe");
+                accion = new JLabel("Respuesta correcta, ataca el heroe");
+                //Poner botones ataque normal y ataque cargado
+                //Usar Habilidades
+            }
+            else{
+                System.out.println("Ataca el Dino");
+                accion = new JLabel("Respuesta incorrecta, ataca el heroe");
+                //Ataca Dino
+            }
+            panel3.add(accion);
+    }
+    }
     public class BotonListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
             try{
@@ -682,9 +739,5 @@ public class Ventana extends JFrame{
 			}
 		}
 	}
-
-    //generar un heroe dependiendo del que se elija al iniciar el juego panel 3
-    //hacer los escenarios de batalla
-    //recolección de items poner limite arrojar accion debes soltar un item para añadir otro
 }
 
