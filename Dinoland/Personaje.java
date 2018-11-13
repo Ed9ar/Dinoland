@@ -1,6 +1,6 @@
 //package ;
-
-public abstract class Personaje implements Atacar{
+import java.io.Serializable;
+public abstract class Personaje implements Atacar, Serializable{
 	private int ataque;
 	private int defensa;
 	private int salud;

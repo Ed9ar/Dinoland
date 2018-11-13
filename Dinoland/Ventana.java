@@ -511,9 +511,6 @@ public class Ventana extends JFrame{
                 pregunta = new JLabel(preguntas[index]);
                 panel3.add(pregunta);
                 panel3.add(combo);
-                System.out.println(mapa.getCasillas()[ei][ej].getDinosaurio().getSalud());
-                mapa.getCasillas()[0][0].getHeroe().getSalud();
-                mapa.getCasillas()[ei][ej].getDinosaurio().getSalud();
             
             if(index % 2 == 0 && combo.getSelectedItem() == "V"){
                 System.out.println("Ataca el Heroe");
@@ -543,13 +540,14 @@ public class Ventana extends JFrame{
                 System.out.println(mapa.getCasillas()[0][0].getHeroe().getSalud());
                 //Ataca Dino
             }
-        }
             panel3.add(accion);
             panel4.removeAll();
             stats = new JLabel(mapa.getCasillas()[0][0].getHeroe().imprimesStats());
             statsD = new JLabel(mapa.getCasillas()[ei][ej].getDinosaurio().imprimesStats());
             panel4.add(stats);
             panel4.add(statsD);
+        }
+
             if(mapa.getCasillas()[4][4].getDinosaurio().getSalud() == 0){
                 System.out.println("FELICIDADES GANASTE");
                 victoria();
@@ -760,7 +758,7 @@ public class Ventana extends JFrame{
     public class SaveListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			try{
-				FileOutputStream fos= new FileOutputStream("partida.atm");
+				FileOutputStream fos= new FileOutputStream("partida.part");
 				ObjectOutputStream oos= new ObjectOutputStream(fos);
 				oos.writeObject(mapa);
 				oos.close();
@@ -774,11 +772,12 @@ public class Ventana extends JFrame{
     public class CargarListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			try{
-				File file = new File("partida.atm");
+				File file = new File("partida.part");
 				FileInputStream fis= new FileInputStream(file);
 				ObjectInputStream ois= new ObjectInputStream(fis);
 				mapa = (Mapa)ois.readObject();
                 mapa.getCasillas()[0][0].getHeroe().imprimirMochila();
+                //pintar todo
 			}catch(IOException ex){
 				System.out.println("Ocurrio un IOException");
 			}catch(ClassNotFoundException ex){

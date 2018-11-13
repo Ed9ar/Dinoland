@@ -2,9 +2,10 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.*;
 import java.awt.*;
+import java.io.Serializable;
 
 //Atacar, la implementa personaje y recibe un Personaje parametro
-public class Casilla{
+public class Casilla implements Serializable{
     private Dinosaurio dinosaurio;
     private Item item;
     private Heroe heroe;

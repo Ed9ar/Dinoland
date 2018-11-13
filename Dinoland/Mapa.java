@@ -1,5 +1,6 @@
 import java.util.Random;
-public class Mapa{
+import java.io.Serializable;
+public class Mapa implements Serializable{
 /*    public static Personaje[][] casillas;
 
     public Mapa(int filas, int columnas){
