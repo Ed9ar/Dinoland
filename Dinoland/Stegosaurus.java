@@ -6,7 +6,7 @@ public class Stegosaurus extends Dinosaurio{
     }
 
     //para golpe con cola generar un numero aleatorio de 1 a 5 y sí es 3 atacar
-    public void golpeConCola(Heroe h){
+    public void Habilidad(Heroe h){
         h.setSalud(h.getSalud()-15);
     }
 }
