@@ -474,6 +474,8 @@ public class Ventana extends JFrame{
     }
 
     public void batalla(){
+        repaint();
+        revalidate();
         panel4.removeAll();
         stats = new JLabel(mapa.getCasillas()[0][0].getHeroe().imprimesStats());
         statsD = new JLabel(mapa.getCasillas()[ei][ej].getDinosaurio().imprimesStats());
@@ -500,18 +502,6 @@ public class Ventana extends JFrame{
     //Con esto se mueve el tipin, solo se mueve la imagen, el objeto permanece en la misma casilla
     public class ComboBoxDemo implements ActionListener{
         public void actionPerformed(ActionEvent l) {
-            //Habilidades del heroe también con probabilidades una vez elegido ataque cargado, si no ataqu
-            while(mapa.getCasillas()[0][0].getHeroe().getSalud() > 0 && mapa.getCasillas()[ei][ej].getDinosaurio().getSalud() > 0){
-                combo = new JComboBox();
-                combo.addItem(" ");
-                combo.addItem("V");
-                combo.addItem("F");
-                combo.addActionListener(new ComboBoxDemo());
-                index = Mapa.calcularProbabilidad(21, 0);
-                pregunta = new JLabel(preguntas[index]);
-                panel3.add(pregunta);
-                panel3.add(combo);
-            
             if(index % 2 == 0 && combo.getSelectedItem() == "V"){
                 System.out.println("Ataca el Heroe");
                 accion = new JLabel("Respuesta correcta, ataca el heroe");
@@ -540,14 +530,42 @@ public class Ventana extends JFrame{
                 System.out.println(mapa.getCasillas()[0][0].getHeroe().getSalud());
                 //Ataca Dino
             }
-            panel3.add(accion);
-            panel4.removeAll();
-            stats = new JLabel(mapa.getCasillas()[0][0].getHeroe().imprimesStats());
-            statsD = new JLabel(mapa.getCasillas()[ei][ej].getDinosaurio().imprimesStats());
-            panel4.add(stats);
-            panel4.add(statsD);
-        }
+            if(mapa.getCasillas()[0][0].getHeroe().getSalud() > 0 && mapa.getCasillas()[ei][ej].getDinosaurio().getSalud() > 0){
+                batalla();
+            }
+            else{
+                mapa.getCasillas()[ei][ej].setDinosaurio(null);
+                square[ei][ej].removeAll();
+                panel4.removeAll();
 
+                panel4.setLayout(new GridLayout(2,3));
+                for(int i = 0; i < 3; i++) {
+                    for(int j = 0; j < 2; j++) {
+                        square2[i][j] = new JButton();
+                        square2[i][j].addActionListener(new BotonListener());
+                        square2[i][j].setLayout(new FlowLayout());
+                        square2[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
+                        panel4.add(square2[i][j]);
+                    }
+                    
+                }
+
+                
+                arribaImage = new ImageIcon("Arriba.png"); //arriba
+                arriba = new JLabel(arribaImage);
+                square2[0][1].add(arriba);
+                abajoImage = new ImageIcon("Abajo.png"); //abajo
+                abajo = new JLabel(abajoImage);
+                square2[2][0].add(abajo);
+                derechaImage = new ImageIcon("Derecha.png");//derecha
+                derecha = new JLabel(derechaImage);
+                square2[2][1].add(derecha);
+                izquierdaImage = new ImageIcon("Izquierda.png");
+                izq = new JLabel(izquierdaImage);
+                square2[1][1].add(izq);
+                add(panel4, BorderLayout.CENTER);
+
+            }
             if(mapa.getCasillas()[4][4].getDinosaurio().getSalud() == 0){
                 System.out.println("FELICIDADES GANASTE");
                 victoria();
@@ -558,6 +576,8 @@ public class Ventana extends JFrame{
                 derrota();
                 mapa.getCasillas()[0][0].getHeroe().imprimeStats();
             }
+            repaint();
+            revalidate();    
 
     }
     }

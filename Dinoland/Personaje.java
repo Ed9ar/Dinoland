@@ -71,7 +71,13 @@ public abstract class Personaje implements Atacar, Serializable{
 
 	@Override
 	public void atacar(Personaje personaje) {
-		personaje.setSalud(personaje.getSalud()-(getAtaque()-(personaje.getDefensa()/4)));
+		if(personaje.getDefensa() > 10){
+			personaje.setSalud(personaje.getSalud()-(getAtaque()*2-(personaje.getDefensa()/4)));
+		}
+		else{
+			personaje.setSalud(personaje.getSalud()-(getAtaque()-(personaje.getDefensa()/4)));
+		}
+
 	}
 	
 	public void atacar(Personaje dinosaurio, int mana){ //Solo dinosaurio	
