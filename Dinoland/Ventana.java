@@ -449,7 +449,8 @@ public class Ventana extends JFrame{
         victoriap.add(ganaste);
         victoriap.add(victoria);
         add(victoriap, BorderLayout.CENTER);
-
+        repaint();
+        revalidate();
         setVisible(true);
         //añadir botón de reiniciar y salir
     }
@@ -468,7 +469,8 @@ public class Ventana extends JFrame{
         derrotap.add(perdiste);
         derrotap.add(derrota);
         add(derrotap, BorderLayout.CENTER);
-
+        repaint();
+        revalidate();
         setVisible(true);
         //añadir botón de reiniciar y salir
     }
@@ -534,7 +536,10 @@ public class Ventana extends JFrame{
                 batalla();
             }
             else{
-                mapa.getCasillas()[ei][ej].setDinosaurio(null);
+                if(mapa.getCasillas()[ei][ej].getDinosaurio() != mapa.getCasillas()[4][4].getDinosaurio()){
+                    mapa.getCasillas()[ei][ej].setDinosaurio(null);
+                }
+
                 square[ei][ej].removeAll();
                 panel4.removeAll();
 
@@ -566,12 +571,12 @@ public class Ventana extends JFrame{
                 add(panel4, BorderLayout.CENTER);
 
             }
-            if(mapa.getCasillas()[4][4].getDinosaurio().getSalud() == 0){
+            if(mapa.getCasillas()[4][4].getDinosaurio().getSalud() <= 0){
                 System.out.println("FELICIDADES GANASTE");
                 victoria();
                 trex.imprimeStats();
             }
-            else if(mapa.getCasillas()[0][0].getHeroe().getSalud() == 0){
+            else if(mapa.getCasillas()[0][0].getHeroe().getSalud() <= 0){
                 System.out.println("Perdiste");
                 derrota();
                 mapa.getCasillas()[0][0].getHeroe().imprimeStats();
@@ -806,4 +811,3 @@ public class Ventana extends JFrame{
 		}
 	}
 }
-
