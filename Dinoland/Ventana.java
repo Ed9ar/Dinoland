@@ -37,8 +37,6 @@ public class Ventana extends JFrame{
         "El Stegosaurus no vivió en el último periodo Jurasico" };//F
          
     private String respuesta;
-    private int i, counter, counter2;
-    private int ei = 0, ej = 0, seleccion;
     private JMenu jMenu;
     private JMenuBar jMenuBar;
     private JMenuItem guardar, cargar;
@@ -49,7 +47,6 @@ public class Ventana extends JFrame{
     private JButton[][] cselect = new JButton[3][1];
     private JPanel[][] square = new JPanel[5][5];
     private JPanel[][] moch = new JPanel[1][5];
-    public int index, counter3;
     private JButton usar1,usar2,usar3,usar4;
     private JButton soltar1,soltar2,soltar3,soltar4;
     private JPanel info, mochila;
@@ -153,29 +150,29 @@ public class Ventana extends JFrame{
         }
         info = new JPanel();
         info.setLayout(new FlowLayout());
-        if(seleccion == 0){
+        if(mapa.seleccion == 0){
             heImage = new ImageIcon("Erguro.jpeg");
             he = new JLabel(erguroImage);
             he2 = new JLabel(erguroImage);
             hei = new JLabel("Este científico desea ingresar al área de investigación"); 
-            square[ei][ej].add(he);
+            square[mapa.ei][mapa.ej].add(he);
             info.add(he2);
             //heroe.imprimeStats();
         }
-        else if(seleccion == 1){
+        else if(mapa.seleccion == 1){
             heImage = new ImageIcon("Mananac.jpeg");
             he = new JLabel(heImage);
             hei = new JLabel("El cazador busca ingresar al área de seguridad del parque" ); 
             he2 = new JLabel(heImage);
-            square[ei][ej].add(he);
+            square[mapa.ei][mapa.ej].add(he);
             info.add(he2);
         }
-        else if(seleccion == 2){
+        else if(mapa.seleccion == 2){
             heImage = new ImageIcon("Truth.gif");
             he = new JLabel(heImage);
             hei = new JLabel("Científica busca ingresar al área de seguridad del parque"); 
             he2 = new JLabel(heImage);
-            square[ei][ej].add(he);
+            square[mapa.ei][mapa.ej].add(he);
             info.add(he2);
             
         }
@@ -327,13 +324,13 @@ public class Ventana extends JFrame{
                         mapa.casillas[i][j].setItem(llave);
                     }
                     else if((i == 0 && j == 0)){
-                        if(seleccion == 0){
+                        if(mapa.seleccion == 0){
                             mapa.casillas[i][j].setHeroe(erguro);
                         }
-                        else if(seleccion == 1){
+                        else if(mapa.seleccion == 1){
                             mapa.casillas[i][j].setHeroe(manana);
                         }
-                        else if(seleccion == 2){
+                        else if(mapa.seleccion == 2){
                             mapa.casillas[i][j].setHeroe(truth);
                             
                         }
@@ -373,9 +370,9 @@ public class Ventana extends JFrame{
             //Otorgar victoria o derrota
             stats = new JLabel(mapa.getCasillas()[0][0].getHeroe().imprimesStats());
         
-            if(counter2 == 0){
+            if(mapa.counter2 == 0){
                 info.add(stats);
-                counter2++;
+                mapa.counter2++;
             }
 
             if(mapa.getCasillas()[4][4].getDinosaurio().getSalud() == 0){
@@ -417,7 +414,7 @@ public class Ventana extends JFrame{
             accion = new JLabel("\n");
             panel3.add(accion);
             System.out.println("Aqui hay un " + mapa.casillas[x][y].getItem().getNombre());
-            accion = new JLabel("Has encontrado un " + mapa.casillas[ei][ej].getItem().getNombre() + " ¿Te gustaría recogerlo?");
+            accion = new JLabel("Has encontrado un " + mapa.casillas[mapa.ei][mapa.ej].getItem().getNombre() + " ¿Te gustaría recogerlo?");
             panel3.add(accion);
             siono = new JButton("Pick");
             siono.addActionListener(new BotonListener());
@@ -449,8 +446,7 @@ public class Ventana extends JFrame{
         victoriap.add(ganaste);
         victoriap.add(victoria);
         add(victoriap, BorderLayout.CENTER);
-        repaint();
-        revalidate();
+
         setVisible(true);
         //añadir botón de reiniciar y salir
     }
@@ -469,8 +465,7 @@ public class Ventana extends JFrame{
         derrotap.add(perdiste);
         derrotap.add(derrota);
         add(derrotap, BorderLayout.CENTER);
-        repaint();
-        revalidate();
+
         setVisible(true);
         //añadir botón de reiniciar y salir
     }
@@ -480,43 +475,251 @@ public class Ventana extends JFrame{
         revalidate();
         panel4.removeAll();
         stats = new JLabel(mapa.getCasillas()[0][0].getHeroe().imprimesStats());
-        statsD = new JLabel(mapa.getCasillas()[ei][ej].getDinosaurio().imprimesStats());
+        statsD = new JLabel(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio().imprimesStats());
         panel4.add(stats);
         panel4.add(statsD);
-        if(mapa.getCasillas()[0][0].getHeroe().getSalud() > 0 && mapa.getCasillas()[ei][ej].getDinosaurio().getSalud() > 0){
+        if(mapa.getCasillas()[0][0].getHeroe().getSalud() > 0 && mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio().getSalud() > 0){
             combo = new JComboBox();
             combo.addItem(" ");
             combo.addItem("V");
             combo.addItem("F");
             combo.addActionListener(new ComboBoxDemo());
-            index = Mapa.calcularProbabilidad(21, 0);
-            pregunta = new JLabel(preguntas[index]);
+            mapa.index = Mapa.calcularProbabilidad(21, 0);
+            pregunta = new JLabel(preguntas[mapa.index]);
             panel3.add(pregunta);
             panel3.add(combo);
-            System.out.println(mapa.getCasillas()[ei][ej].getDinosaurio().getSalud());
+            System.out.println(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio().getSalud());
             mapa.getCasillas()[0][0].getHeroe().getSalud();
-            mapa.getCasillas()[ei][ej].getDinosaurio().getSalud();
+            mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio().getSalud();
             
         }
     
     }
 
+    public void repaintMap(){
+        remove(character);
+        setSize(900,900);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        panel1 = new JPanel();
+        jMenuBar= new JMenuBar();
+		jMenu= new JMenu("Archivo");
+		jMenuBar.add(jMenu);
+		guardar = new JMenuItem("Guardar Partida");
+		guardar.addActionListener(new SaveListener());
+		jMenu.add(guardar);
+		setJMenuBar(jMenuBar);
+        //panel1.setLayout(new FlowLayout());
+
+        //Mapa en el segundo panel (Hacer un grid de 5x5 y poner el monito en donde se vaya moviendo con el listener)
+	    TitledBorder border1 = new TitledBorder("Mapa");
+        panel1.setBorder(border1);
+        panel1.setLayout(new GridLayout(5,5));
+
+        //generar objetos y meterlos a diferentes espacios en el mapa(Dinosaurios,Items,Heroe)
+        for(int i = 0; i < 5; i++) {
+            for(int j = 0; j < 5; j++) {
+                square[i][j] = new JPanel();
+                square[i][j].setLayout(new FlowLayout());
+                square[i][j].setBackground(Color.GREEN);
+                square[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
+                panel1.add(square[i][j]);
+            }
+            
+        }
+        info = new JPanel();
+        info.setLayout(new FlowLayout());
+
+        if(mapa.seleccion == 0){
+            heImage = new ImageIcon("Erguro.jpeg");
+            he = new JLabel(erguroImage);
+            he2 = new JLabel(erguroImage);
+            hei = new JLabel("Este científico desea ingresar al área de investigación"); 
+            square[mapa.ei][mapa.ej].add(he);
+            info.add(he2);
+            //heroe.imprimeStats();
+        }
+        else if(mapa.seleccion == 1){
+            heImage = new ImageIcon("Mananac.jpeg");
+            he = new JLabel(heImage);
+            hei = new JLabel("El cazador busca ingresar al área de seguridad del parque" ); 
+            he2 = new JLabel(heImage);
+            square[mapa.ei][mapa.ej].add(he);
+            info.add(he2);
+        }
+        else if(mapa.seleccion == 2){
+            heImage = new ImageIcon("Truth.gif");
+            he = new JLabel(heImage);
+            hei = new JLabel("Científica busca ingresar al área de seguridad del parque"); 
+            he2 = new JLabel(heImage);
+            square[mapa.ei][mapa.ej].add(he);
+            info.add(he2);
+            
+        }
+        info.add(hei);
+        //square[0][0].add(erguro);
+        velociraptorImage = new ImageIcon("raptor.png");
+        raptor = new JLabel(velociraptorImage);
+        raptor2 = new JLabel(velociraptorImage);
+        raptor3 = new JLabel(velociraptorImage);
+        square[4][3].add(raptor3);
+        square[2][0].add(raptor);
+        trexImage = new ImageIcon("Tyrannosaurio.png");
+        tyr = new JLabel(trexImage);
+        square[4][4].add(tyr);
+        iguanodonImage = new ImageIcon("iguanodon.png");
+        ig = new JLabel(iguanodonImage);
+        ig2 = new JLabel(iguanodonImage);
+        square[4][0].add(ig2);
+        square[1][4].add(ig);
+        stegosaurusImage = new ImageIcon("steg.png");
+        steg = new JLabel(stegosaurusImage);
+        steg2 = new JLabel(stegosaurusImage);
+        square[3][2].add(steg);
+        square[2][3].add(steg2);
+        square[0][3].add(raptor2);
+
+
+        add(panel1, BorderLayout.CENTER);
+
+        //revalidate
+        //repaint
+
+        panel2 = new JPanel();
+        TitledBorder border2 = new TitledBorder("Personaje");
+        panel2.setLayout(new GridLayout(2,1));
+        mochila = new JPanel();
+        mochl = new JLabel("MOCHILA");
+        mochila.add(mochl);
+        for(int i = 0; i < 1; i++) {
+            for(int j = 0; j < 4; j++) {
+                moch[i][j] = new JPanel();
+                //item = new JLabel(mapa.getCasillas()[0][0].getHeroe().getMochila()[j].getItem().getNombre());
+                //moch[i][j].add(item);
+                moch[i][j].setLayout(new GridLayout(2,1));
+                moch[i][j].setBackground(Color.ORANGE);
+                moch[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
+                mochila.add(moch[i][j]);
+            }
+            usar1 = new JButton("Usar");
+            usar1.addActionListener(new BotonListener());
+            soltar1 = new JButton("Soltar");
+            soltar1.addActionListener(new BotonListener());
+            moch[0][0].add(usar1);
+            moch[0][0].add(soltar1);
+            usar2 = new JButton("Usar");
+            usar2.addActionListener(new BotonListener());
+            soltar2 = new JButton("Soltar");
+            soltar2.addActionListener(new BotonListener());
+            moch[0][1].add(usar2);
+            moch[0][1].add(soltar2);
+            usar3 = new JButton("Usar");
+            usar3.addActionListener(new BotonListener());
+            soltar3 = new JButton("Soltar");
+            soltar3.addActionListener(new BotonListener());
+            moch[0][2].add(usar3);
+            moch[0][2].add(soltar3);
+            usar4 = new JButton("Usar");
+            usar4.addActionListener(new BotonListener());
+            soltar4 = new JButton("Soltar");
+            soltar4.addActionListener(new BotonListener());
+            moch[0][3].add(usar4);
+            moch[0][3].add(soltar4);
+        }
+        mochila.setBorder(BorderFactory.createLineBorder(Color.black));
+        info.setBorder(BorderFactory.createLineBorder(Color.black));
+        panel2.setBorder(border2);
+        panel2.add(info);
+        panel2.add(mochila);
+        add(panel2);
+
+        panel3 = new JPanel();
+        TitledBorder border3 = new TitledBorder("Acciones");
+        panel3.setLayout(new GridLayout(1000,1));
+        panel3.setBorder(border3);
+        scrollPane = new JScrollPane(panel3);
+        accion = new JLabel("Bienvenido a Dinoland");
+        scrollPane.add(accion);
+        add(scrollPane);
+        panel3.add(accion);
+        
+
+        panel4 = new JPanel();
+        TitledBorder border4 = new TitledBorder("Movimiento");
+        //panel4.setLayout(new FlowLayout());
+        panel4.setBorder(border4);
+
+        panel4.setLayout(new GridLayout(2,3));
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 2; j++) {
+                square2[i][j] = new JButton();
+                square2[i][j].addActionListener(new BotonListener());
+                square2[i][j].setLayout(new FlowLayout());
+                square2[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
+                panel4.add(square2[i][j]);
+            }
+            
+        }
+
+        
+        arribaImage = new ImageIcon("Arriba.png"); //arriba
+        arriba = new JLabel(arribaImage);
+        square2[0][1].add(arriba);
+        abajoImage = new ImageIcon("Abajo.png"); //abajo
+        abajo = new JLabel(abajoImage);
+        square2[2][0].add(abajo);
+        derechaImage = new ImageIcon("Derecha.png");//derecha
+        derecha = new JLabel(derechaImage);
+        square2[2][1].add(derecha);
+        izquierdaImage = new ImageIcon("Izquierda.png");
+        izq = new JLabel(izquierdaImage);
+        square2[1][1].add(izq);
+        add(panel4, BorderLayout.CENTER);
+
+        //Poner JLabels a la mochila
+        for(int i = 0; i < 1; i++){
+            mapa.counter = 0;
+            for(int j = 0; j < 5; j++){
+                if(mapa.getCasillas()[0][0].getHeroe().getMochila()[0] != null && mapa.counter == 0 && item == null || mapa.getCasillas()[0][0].getHeroe().getMochila()[j] == null  && mapa.counter == 0){
+                    item = new JLabel(mapa.getCasillas()[mapa.ei][mapa.ej].getItem().getNombre());
+                    if(j > 0){
+                        moch[i][j-1].add(item); 
+                    }
+                    else{
+                        moch[i][j].add(item); 
+                    }
+                    mapa.counter++;                                  
+                }
+            }
+        }
+        mapa.casillas[mapa.ei][mapa.ej].setItem(null);
+        
+        stats = new JLabel("Stats del heroe:"+ mapa.getCasillas()[0][0].getHeroe().getNombre() + " Salud: "
+        + mapa.getCasillas()[0][0].getHeroe().getSalud()
+        +" Ataque: "+ mapa.getCasillas()[0][0].getHeroe().getAtaque()
+        +" Defensa: "+ mapa.getCasillas()[0][0].getHeroe().getDefensa()+ "Mana : " + mapa.getCasillas()[0][0].getHeroe().getMana());
+        info.add(stats);
+    
+        revalidate();
+        repaint();       
+        setVisible(true);
+    }
+
     //Con esto se mueve el tipin, solo se mueve la imagen, el objeto permanece en la misma casilla
     public class ComboBoxDemo implements ActionListener{
         public void actionPerformed(ActionEvent l) {
-            if(index % 2 == 0 && combo.getSelectedItem() == "V"){
+            if(mapa.index % 2 == 0 && combo.getSelectedItem() == "V"){
                 System.out.println("Ataca el Heroe");
                 accion = new JLabel("Respuesta correcta, ataca el heroe");
-                mapa.getCasillas()[0][0].getHeroe().atacar(mapa.getCasillas()[ei][ej].getDinosaurio());
-                System.out.println(mapa.getCasillas()[ei][ej].getDinosaurio().getSalud());
+                mapa.getCasillas()[0][0].getHeroe().atacar(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio());
+                System.out.println(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio().getSalud());
                 //Poner botones ataque normal y ataque cargado
                 //Usar Habilidades
             }
-            else if(index % 2 != 0 && combo.getSelectedItem() == "F"){
+            else if(mapa.index % 2 != 0 && combo.getSelectedItem() == "F"){
                 System.out.println("Ataca el Heroe");
                 accion = new JLabel("Respuesta correcta, ataca el heroe");
-                mapa.getCasillas()[0][0].getHeroe().atacar(mapa.getCasillas()[ei][ej].getDinosaurio());
-                System.out.println(mapa.getCasillas()[ei][ej].getDinosaurio().getSalud());
+                mapa.getCasillas()[0][0].getHeroe().atacar(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio());
+                System.out.println(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio().getSalud());
                 //Poner botones ataque normal y ataque cargado
                 //Usar Habilidades
             }
@@ -524,23 +727,23 @@ public class Ventana extends JFrame{
                 System.out.println("Ataca el Dino");
                 accion = new JLabel("Respuesta incorrecta, ataca el Dino");
                 if(Mapa.calcularProbabilidad(10,0) == 2){
-                    mapa.getCasillas()[ei][ej].getDinosaurio().Habilidad(mapa.getCasillas()[0][0].getHeroe());
+                    mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio().Habilidad(mapa.getCasillas()[0][0].getHeroe());
                 } 
                 else{
-                    mapa.getCasillas()[ei][ej].getDinosaurio().atacar(mapa.getCasillas()[0][0].getHeroe());
+                    mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio().atacar(mapa.getCasillas()[0][0].getHeroe());
                 }
                 System.out.println(mapa.getCasillas()[0][0].getHeroe().getSalud());
                 //Ataca Dino
             }
-            if(mapa.getCasillas()[0][0].getHeroe().getSalud() > 0 && mapa.getCasillas()[ei][ej].getDinosaurio().getSalud() > 0){
+            if(mapa.getCasillas()[0][0].getHeroe().getSalud() > 0 && mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio().getSalud() > 0){
                 batalla();
             }
             else{
-                if(mapa.getCasillas()[ei][ej].getDinosaurio() != mapa.getCasillas()[4][4].getDinosaurio()){
-                    mapa.getCasillas()[ei][ej].setDinosaurio(null);
+                if(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio() != mapa.getCasillas()[4][4].getDinosaurio()){
+                    mapa.getCasillas()[mapa.ei][mapa.ej].setDinosaurio(null);
                 }
 
-                square[ei][ej].removeAll();
+                square[mapa.ei][mapa.ej].removeAll();
                 panel4.removeAll();
 
                 panel4.setLayout(new GridLayout(2,3));
@@ -590,52 +793,52 @@ public class Ventana extends JFrame{
 		public void actionPerformed(ActionEvent e){
             try{
                 if (e.getSource() == square2[0][1]) {
-                    ei--;
-                    inc(ei, ej);
-                    square[ei][ej].remove(he);
+                    mapa.ei--;
+                    inc(mapa.ei, mapa.ej);
+                    square[mapa.ei][mapa.ej].remove(he);
                     repaint();
                     revalidate();
-                    square[ei][ej].add(he);
+                    square[mapa.ei][mapa.ej].add(he);
                     //System.out.println("Presionaste arriba");
                     
                 }else if (e.getSource() == square2[2][0]) {
                     //System.out.println("Presionaste abajo");
-                    ei++;
-                    inc(ei, ej);
-                    square[ei][ej].remove(he);
+                    mapa.ei++;
+                    inc(mapa.ei, mapa.ej);
+                    square[mapa.ei][mapa.ej].remove(he);
                     repaint();
                     revalidate();
-                    square[ei][ej].add(he);
+                    square[mapa.ei][mapa.ej].add(he);
                 }else if (e.getSource() == square2[1][1]) {
-                    ej--;
-                    inc(ei, ej);
-                    square[ei][ej].remove(he);
+                    mapa.ej--;
+                    inc(mapa.ei, mapa.ej);
+                    square[mapa.ei][mapa.ej].remove(he);
                     repaint();
                     revalidate();
-                    square[ei][ej].add(he);
+                    square[mapa.ei][mapa.ej].add(he);
                     //System.out.println("Presionaste izquierda");
                 }else if (e.getSource() == square2[2][1]) {
-                    ej++;
-                    inc(ei, ej);
-                    square[ei][ej].remove(he);
+                    mapa.ej++;
+                    inc(mapa.ei, mapa.ej);
+                    square[mapa.ei][mapa.ej].remove(he);
                     repaint();
                     revalidate();
-                    square[ei][ej].add(he);
+                    square[mapa.ei][mapa.ej].add(he);
                     //System.out.println("Presionaste derecha");
                 }
                 else if(e.getSource() == cselect[0][0]){
                     //System.out.println("Has seleccionado a Erguro");
-                    seleccion = 0;
+                    mapa.seleccion = 0;
                     initComponents(); 
                 }
                 else if(e.getSource() == cselect[1][0]){
                     //System.out.println("Has seleccionado a Manana");
-                    seleccion = 1;
+                    mapa.seleccion = 1;
                     initComponents(); 
                 }
                 else if(e.getSource() == cselect[2][0]){
                     //System.out.println("Has seleccionado a Truth");
-                    seleccion = 2;
+                    mapa.seleccion = 2;
                     initComponents(); 
                 }
                 //Poner los dos botones usar/soltar para cada espacio
@@ -744,29 +947,29 @@ public class Ventana extends JFrame{
                 }
                 else if(e.getSource() == siono){
                     System.out.println("Recogiste Item");
-                    accion = new JLabel("Recogiste un " + mapa.getCasillas()[ei][ej].getItem().getNombre());
+                    accion = new JLabel("Recogiste un " + mapa.getCasillas()[mapa.ei][mapa.ej].getItem().getNombre());
                     panel3.add(accion);
                     //System.out.println(mapa.getCasillas()[ei][ej].getItem());
-                    mapa.getCasillas()[0][0].getHeroe().aniadirItem(mapa.getCasillas()[ei][ej].getItem());
-                    System.out.println(mapa.getCasillas()[ei][ej].getItem().getNombre());
+                    mapa.getCasillas()[0][0].getHeroe().aniadirItem(mapa.getCasillas()[mapa.ei][mapa.ej].getItem());
+                    System.out.println(mapa.getCasillas()[mapa.ei][mapa.ej].getItem().getNombre());
                     mapa.getCasillas()[0][0].getHeroe().imprimirMochila();
                     //Poner JLabels a la mochila
                     for(int i = 0; i < 1; i++){
-                        counter = 0;
+                        mapa.counter = 0;
                         for(int j = 0; j < 5; j++){
-                            if(mapa.getCasillas()[0][0].getHeroe().getMochila()[0] != null && counter == 0 && item == null || mapa.getCasillas()[0][0].getHeroe().getMochila()[j] == null  && counter == 0){
-                                item = new JLabel(mapa.getCasillas()[ei][ej].getItem().getNombre());
+                            if(mapa.getCasillas()[0][0].getHeroe().getMochila()[0] != null && mapa.counter == 0 && item == null || mapa.getCasillas()[0][0].getHeroe().getMochila()[j] == null  && mapa.counter == 0){
+                                item = new JLabel(mapa.getCasillas()[mapa.ei][mapa.ej].getItem().getNombre());
                                 if(j > 0){
                                     moch[i][j-1].add(item); 
                                 }
                                 else{
                                     moch[i][j].add(item); 
                                 }
-                                counter++;                                  
+                                mapa.counter++;                                  
                             }
                         }
                     }
-                    mapa.casillas[ei][ej].setItem(null);
+                    mapa.casillas[mapa.ei][mapa.ej].setItem(null);
                     
                 }
             }
@@ -802,7 +1005,7 @@ public class Ventana extends JFrame{
 				ObjectInputStream ois= new ObjectInputStream(fis);
 				mapa = (Mapa)ois.readObject();
                 mapa.getCasillas()[0][0].getHeroe().imprimirMochila();
-                //pintar todo
+                repaintMap();
 			}catch(IOException ex){
 				System.out.println("Ocurrio un IOException");
 			}catch(ClassNotFoundException ex){
