@@ -1,11 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.io.*;
-//import org.graalvm.compiler.hotspot.stubs.OutOfBoundsExceptionStub;
-
-//import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
 import java.awt.event.*;
-//import TiposDeDinosaurio.TRex.*;
 import java.awt.*;
 import java.util.Random;
 
@@ -710,7 +706,14 @@ public class Ventana extends JFrame{
             if(mapa.index % 2 == 0 && combo.getSelectedItem() == "V"){
                 System.out.println("Ataca el Heroe");
                 accion = new JLabel("Respuesta correcta, ataca el heroe");
-                mapa.getCasillas()[0][0].getHeroe().atacar(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio());
+                if(Mapa.calcularProbabilidad(20, 0) == 5){
+                    mapa.getCasillas()[0][0].getHeroe().atacar(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio(), mapa.getCasillas()[0][0].getHeroe().getMana());
+                    mapa.getCasillas()[0][0].getHeroe().setMana(mapa.getCasillas()[0][0].getHeroe().getMana()-10);
+                    accion = new JLabel("Ataque esepcial");
+                }
+                else{
+                    mapa.getCasillas()[0][0].getHeroe().atacar(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio());
+                }
                 System.out.println(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio().getSalud());
                 //Poner botones ataque normal y ataque cargado
                 //Usar Habilidades
@@ -718,7 +721,14 @@ public class Ventana extends JFrame{
             else if(mapa.index % 2 != 0 && combo.getSelectedItem() == "F"){
                 System.out.println("Ataca el Heroe");
                 accion = new JLabel("Respuesta correcta, ataca el heroe");
-                mapa.getCasillas()[0][0].getHeroe().atacar(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio());
+                if(Mapa.calcularProbabilidad(20, 0) == 5){
+                    mapa.getCasillas()[0][0].getHeroe().atacar(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio(), mapa.getCasillas()[0][0].getHeroe().getMana());
+                    mapa.getCasillas()[0][0].getHeroe().setMana(mapa.getCasillas()[0][0].getHeroe().getMana()-10);
+                    accion = new JLabel("Ataque especial");
+                }
+                else{
+                    mapa.getCasillas()[0][0].getHeroe().atacar(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio());
+                }
                 System.out.println(mapa.getCasillas()[mapa.ei][mapa.ej].getDinosaurio().getSalud());
                 //Poner botones ataque normal y ataque cargado
                 //Usar Habilidades

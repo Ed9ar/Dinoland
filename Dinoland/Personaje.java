@@ -81,6 +81,6 @@ public abstract class Personaje implements Atacar, Serializable{
 	}
 	
 	public void atacar(Personaje dinosaurio, int mana){ //Solo dinosaurio	
-		dinosaurio.setSalud(dinosaurio.getSalud()-(getAtaque()+mana/2 -dinosaurio.getDefensa()-1));//+Item.getPuntos()
+		dinosaurio.setSalud(dinosaurio.getSalud()-(getAtaque()+mana/2 -dinosaurio.getDefensa()-1));
 	}
 }
