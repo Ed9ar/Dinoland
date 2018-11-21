@@ -32,7 +32,10 @@ public abstract class Heroe extends Personaje{
 		imprimeStats();
 		v.imprimeStats();
 	}*/
-
+	public void Habilidad(){
+		System.out.println("Habilidad");
+	}
+	
 	public Item[] getMochila(){
 		return mochila;
 	}

@@ -8,9 +8,10 @@ public class Manana extends Heroe{
         int mana = getMana();
         //Cambiar por Manana
         if(mana >= 40){
-            //Multiplicar Stats
-            System.out.println("Has recuperado todos tus stats");
-            //erguro.setMana(0);
+            setSalud(getSalud()+3);
+            setAtaque(getAtaque()+5);
+            setDefensa(getDefensa()+3);
+            setMana(getMana()-20);
         }
         else{
             System.out.println("No hay suficiente mana");

@@ -12,6 +12,7 @@ public class Erguro extends Heroe{
             setSalud(getSalud()+5);
             setAtaque(getAtaque()+5);
             setDefensa(getDefensa()+5);
+            setMana(getMana()-20);
         }
         else{
             System.out.println("No hay suficiente mana");

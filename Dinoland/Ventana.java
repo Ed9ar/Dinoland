@@ -8,6 +8,7 @@ import java.util.Random;
 
 public class Ventana extends JFrame{
     private JComboBox combo;
+    private JButton habilidad;
     private JPanel panel1, panel2,panel3,panel4, character, victoriap, derrotap;
     private String[] preguntas = {"El TRex podia vivir hasta 30 años", //V
         "La sangre del T-Rex era fría como la de todos los reptiles", //F
@@ -151,6 +152,9 @@ public class Ventana extends JFrame{
             he = new JLabel(erguroImage);
             he2 = new JLabel(erguroImage);
             hei = new JLabel("Este científico desea ingresar al área de investigación"); 
+            habilidad = new JButton("Habilidad");
+            habilidad.addActionListener(new BotonListener());
+            info.add(habilidad);
             square[mapa.ei][mapa.ej].add(he);
             info.add(he2);
             //heroe.imprimeStats();
@@ -160,6 +164,9 @@ public class Ventana extends JFrame{
             he = new JLabel(heImage);
             hei = new JLabel("El cazador busca ingresar al área de seguridad del parque" ); 
             he2 = new JLabel(heImage);
+            habilidad = new JButton("Habilidad");
+            habilidad.addActionListener(new BotonListener());
+            info.add(habilidad);
             square[mapa.ei][mapa.ej].add(he);
             info.add(he2);
         }
@@ -168,6 +175,9 @@ public class Ventana extends JFrame{
             he = new JLabel(heImage);
             hei = new JLabel("Científica busca ingresar al área de seguridad del parque"); 
             he2 = new JLabel(heImage);
+            habilidad = new JButton("Habilidad");
+            habilidad.addActionListener(new BotonListener());
+            info.add(habilidad);
             square[mapa.ei][mapa.ej].add(he);
             info.add(he2);
             
@@ -530,6 +540,8 @@ public class Ventana extends JFrame{
             he = new JLabel(erguroImage);
             he2 = new JLabel(erguroImage);
             hei = new JLabel("Este científico desea ingresar al área de investigación"); 
+            habilidad = new JButton("Habilidad");
+            habilidad.addActionListener(new BotonListener());
             square[mapa.ei][mapa.ej].add(he);
             info.add(he2);
             //heroe.imprimeStats();
@@ -539,6 +551,8 @@ public class Ventana extends JFrame{
             he = new JLabel(heImage);
             hei = new JLabel("El cazador busca ingresar al área de seguridad del parque" ); 
             he2 = new JLabel(heImage);
+            habilidad = new JButton("Habilidad");
+            habilidad.addActionListener(new BotonListener());
             square[mapa.ei][mapa.ej].add(he);
             info.add(he2);
         }
@@ -547,10 +561,13 @@ public class Ventana extends JFrame{
             he = new JLabel(heImage);
             hei = new JLabel("Científica busca ingresar al área de seguridad del parque"); 
             he2 = new JLabel(heImage);
+            habilidad = new JButton("Habilidad");
+            habilidad.addActionListener(new BotonListener());
             square[mapa.ei][mapa.ej].add(he);
             info.add(he2);
             
         }
+        info.add(habilidad);
         info.add(hei);
         //square[0][0].add(erguro);
         velociraptorImage = new ImageIcon("raptor.png");
@@ -952,6 +969,17 @@ public class Ventana extends JFrame{
                     accion = new JLabel("Soltaste Item ");
                     moch[0][3].remove(item);
                     panel3.add(accion);
+                    repaint();
+                    revalidate();
+                }
+                else if(e.getSource() == habilidad){
+                    mapa.getCasillas()[0][0].getHeroe().Habilidad();
+                    info.remove(stats);
+                    stats = new JLabel("Stats del heroe:"+ mapa.getCasillas()[0][0].getHeroe().getNombre() + " Salud: "
+                    + mapa.getCasillas()[0][0].getHeroe().getSalud()
+                    +" Ataque: "+ mapa.getCasillas()[0][0].getHeroe().getAtaque()
+                    +" Defensa: "+ mapa.getCasillas()[0][0].getHeroe().getDefensa()+ "Mana : " + mapa.getCasillas()[0][0].getHeroe().getMana());
+                    info.add(stats);
                     repaint();
                     revalidate();
                 }

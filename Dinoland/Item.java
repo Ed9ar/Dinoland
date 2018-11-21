@@ -1,4 +1,7 @@
 import java.io.Serializable;
+
+//package modelos;
+
 public class Item implements Serializable{
 	
 	private String nombre;
